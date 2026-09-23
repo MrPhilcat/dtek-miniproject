@@ -3,25 +3,23 @@
 SRC_DIR = src
 SUPPORT_DIR = support
 
-# Find all .c and .S files in both directories
-SOURCES = \((shell find\)(SRC_DIR) $(SUPPORT_DIR) -name '*.c' -or -name '*.S')
-OBJECTS = \((addsuffix .o,\)(basename \((notdir\)(SOURCES))))
+SOURCES = $(shell find $(SRC_DIR) $(SUPPORT_DIR) -name '*.c' -or -name '*.S')
+OBJECTS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 
 LINKER = $(SUPPORT_DIR)/dtekv-script.lds
 TOOLCHAIN = riscv32-unknown-elf-
 
-# Added -I$(SUPPORT_DIR) so main.c can find dtekv-lib.h
 CFLAGS = -Wall -nostdlib -O3 -mabi=ilp32 -march=rv32imzicsr -fno-builtin -I$(SUPPORT_DIR)
 
 build: clean main.bin
 
 main.elf: 
-	\((TOOLCHAIN)gcc -c\)(CFLAGS) $(SOURCES)
-	\((TOOLCHAIN)ld -o\)@ -T \((LINKER)\)(filter-out boot.o, \((OBJECTS))\)(SUPPORT_DIR)/softfloat.a
+	$(TOOLCHAIN)gcc -c $(CFLAGS) $(SOURCES)
+	$(TOOLCHAIN)ld -o $@ -T $(LINKER) $(filter-out boot.o, $(OBJECTS)) $(SUPPORT_DIR)/softfloat.a
 
 main.bin: main.elf
-	\((TOOLCHAIN)objcopy --output-target binary\)< $@
-	\((TOOLCHAIN)objdump -D\)< > $<.txt
+	$(TOOLCHAIN)objcopy --output-target binary $< $@
+	$(TOOLCHAIN)objdump -D $< > $<.txt
 
 clean:
 	rm -f *.o *.elf *.bin *.txt

@@ -1,6 +1,7 @@
 # Compiled objects and binaries
 *.o
 *.elf
+*.elf.txt
 *.bin
 *.hex
 *.out
