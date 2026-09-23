@@ -1,0 +1,9 @@
+# Compiled objects and binaries
+*.o
+*.elf
+*.bin
+*.hex
+*.out
+
+# VS Code settings (optional, but recommended if you have different local paths)
+.vscode/
