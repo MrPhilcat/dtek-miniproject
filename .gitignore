@@ -7,3 +7,4 @@
 
 # VS Code settings (optional, but recommended if you have different local paths)
 .vscode/
+.DS_Store
