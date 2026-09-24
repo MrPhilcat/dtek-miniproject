@@ -4,7 +4,7 @@ welcome_msg: .asciz "================================================\n===== RIS
 	
 .section .text
 .align 2
-.globl _start
+.globl _start, enable_interrupt
 	
 _isr_handler:
 	j _isr_routine	   /* ISR service routine here */
@@ -125,3 +125,14 @@ _start:
 	jal main
 	
 loop:	j loop
+
+enable_interrupt:
+	# Enable Timer Interrupt (Set bit 16 in mie)
+	li t0, 0x10000       # 0x10000 is 1 << 16
+	csrs mie, t0
+
+	# Enable Global Interrupts (Set bit 3 in mstatus)
+	li t0, 0x8           # 0x8 is 1 << 3
+	csrs mstatus, t0
+
+	jr ra

@@ -59,9 +59,9 @@ void render_place(){
     }
 
     // Print place with spaces to center it (11 chars total)
-    move_cursor(2, 42);
+    move_cursor(2, 43);
     int spaces1 = 0;
-    for(int i = 0; i < ((11 - length)/2); i++){
+    for(int i = 0; i < ((11 - length + 1)/2); i++){ // +1 for round up
         printc(' ');
         spaces1++;
     }
@@ -72,8 +72,8 @@ void render_place(){
 }
 
 void render_time(){
-    move_cursor(2, 69);
-    if(time < 600) {printc(' ');}
+    move_cursor(2, 70);
+    if(time < 600) {printc('0');}
     print_dec((time - (time % 60))/60);
     printc(':');
     if((time % 60) < 10) {printc('0');}

@@ -4,9 +4,9 @@
 #define INVENTORY_CAPACITY 3
 #define TOTAL_CLUES 4
 
-unsigned int success_rate = 50;
-char *place = "Elevator";
-unsigned int time = 0;
+extern unsigned int success_rate;
+extern char *place;
+extern unsigned int time;
 
 typedef enum
 {
