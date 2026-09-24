@@ -5,9 +5,7 @@
 extern void enable_interrupt(void);
 
 //Global Variables
-int success_rate = 50;
-char *place = "Elevator";
-int time = 0;
+
 
 
 // Stub for the interrupt handler expected by boot.S
