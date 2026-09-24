@@ -1,4 +1,7 @@
-#include "dtekv-lib.h" // Includes your board's helper functions
+/* Below functions are external and found in other files. */
+#include "dtekv-lib.h"
+#include "rendering.h"
+extern void enable_interrupt(void);
 
 // Stub for the interrupt handler expected by boot.S
 void handle_interrupt(void) {
