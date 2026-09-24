@@ -1,7 +1,14 @@
 /* Below functions are external and found in other files. */
 #include "dtekv-lib.h"
 #include "rendering.h"
+#include "graphics.h"
 extern void enable_interrupt(void);
+
+//Global Variables
+int success_rate = 50;
+char *place = "Elevator";
+int time = 0;
+
 
 // Stub for the interrupt handler expected by boot.S
 void handle_interrupt(void) {
@@ -10,7 +17,8 @@ void handle_interrupt(void) {
 
 int main(void) {
     // Main program loop will go here
-    print("Hello, World!\n");
+    clear_screen();
+    draw_static_ui();
     while(1) {
         
     }
