@@ -1,6 +1,7 @@
 #include "rendering.h"
 #include "graphics.h"
-#include "dtekv-lib.h" // Include this if your rendering logic needs print()
+#include "game_state.h"
+#include "dtekv-lib.h"
 
 void clear_screen() {
     // \x1b[   -> Start escape sequence
@@ -42,6 +43,40 @@ void draw_static_ui() {
     }
 }
 
-void update_info(){
-    
+void render_succes_rate(){
+    // Update Success rate
+    move_cursor(2, 20);
+    if (success_rate < 100 ) {printc(' ');}
+    print_dec(success_rate);
+    if (success_rate < 10 ) {printc(' ');}
 }
+
+void render_place(){
+    // Calculate word length of place
+    int length = 0;
+    while (place[length] != '\0') {
+        length++;
+    }
+
+    // Print place with spaces to center it (11 chars total)
+    move_cursor(2, 42);
+    int spaces1 = 0;
+    for(int i = 0; i < ((11 - length)/2); i++){
+        printc(' ');
+        spaces1++;
+    }
+    print((char*)place);
+    for(int i = 0; i < (11 - length - spaces1); i++){
+        printc(' ');
+    }
+}
+
+void render_time(){
+    move_cursor(2, 69);
+    if(time < 600) {printc(' ');}
+    print_dec((time - (time % 60))/60);
+    printc(':');
+    if((time % 60) < 10) {printc('0');}
+    print_dec(time % 60);
+}
+//"|     Success rate: XXX    |    Location: Living Room    |     Time: XX:XX     |"
