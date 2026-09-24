@@ -6,6 +6,6 @@
 // are defined in a different file. Just trust me."
 extern const char *ui_line;
 extern const char *ui_info;
-extern const char *boss_frame_2[];
+extern const char *test_gif[][12];
 
 #endif

@@ -3,6 +3,10 @@
 #include "game_state.h"
 #include "dtekv-lib.h"
 
+void hide_cursor(){
+    print("\x1b[?25l");
+}
+
 void clear_screen() {
     // \x1b[   -> Start escape sequence
     // 2J      -> Clear entire display
@@ -79,4 +83,69 @@ void render_time(){
     if((time % 60) < 10) {printc('0');}
     print_dec(time % 60);
 }
-//"|     Success rate: XXX    |    Location: Living Room    |     Time: XX:XX     |"
+
+static int rows_match(const char *s1, const char *s2) {
+    while (*s1 && *s2) {
+        if (*s1 != *s2) return 0;
+        s1++;
+        s2++;
+    }
+    return (*s1 == *s2);
+}
+
+// Universal "delta-render" gif frame
+static void render_gif_delta(const char **gif_data, int rows, int total_frames, int start_row, int start_col, int force_redraw) {
+    // Find the previous frame index (wraps around to the last frame)
+    int prev_frame;
+    if (gif_frame == 0) {
+        prev_frame = total_frames - 1; 
+    } else {
+        prev_frame = gif_frame - 1;
+    }
+
+    for (int i = 0; i < rows; i++) {
+        // Flatten the 2D array index mathematically to support any row count
+        const char *current_row_str = gif_data[gif_frame * rows + i];
+        const char *prev_row_str    = gif_data[prev_frame * rows + i];
+
+        // Redraw the row only if forced (new state) or if the characters changed
+        if (force_redraw || !rows_match(current_row_str, prev_row_str)) {
+            move_cursor(start_row + i, start_col);
+            print((char*)current_row_str);
+        }
+    }
+
+    gif_frame++;
+    if (gif_frame >= total_frames) {
+        gif_frame = 0;
+    }
+}
+
+static int prev_gif_state = -1;
+
+void play_gif_frame() {
+    int force_redraw = 0;
+
+    // Detect if the gif is new
+    if (gif_state != prev_gif_state) {
+        gif_frame = 0;             // Reset to first frame
+        force_redraw = 1;          // Invalidate cache: redraw all rows
+        prev_gif_state = gif_state;
+    }
+
+    switch (gif_state) {
+        case 1:
+            // test_gif: 12 rows, 5 frames. Drawn at row 4, col 27.
+            render_gif_delta((const char **)test_gif, 12, 5, 4, 27, force_redraw);
+            break;
+
+        case 2:
+            break;
+
+        case 3:
+            break;
+
+        default:
+            break;
+    }
+}

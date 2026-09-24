@@ -4,6 +4,11 @@
 #define INVENTORY_CAPACITY 3
 #define TOTAL_CLUES 4
 
+// Rendering Logic
+extern int gif_state;
+extern int gif_frame;
+
+// Game Logic
 extern unsigned int success_rate;
 extern char *place;
 extern unsigned int time;
