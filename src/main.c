@@ -10,6 +10,7 @@ void handle_interrupt(void) {
 
 int main(void) {
     // Main program loop will go here
+    print("Hello, World!\n");
     while(1) {
         
     }
