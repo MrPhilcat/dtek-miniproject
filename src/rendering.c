@@ -3,10 +3,21 @@
 #include "game_state.h"
 #include "dtekv-lib.h"
 
+// Call to hide terminal cursor
 void hide_cursor(){
     print("\x1b[?25l");
 }
 
+// Helper function to move cursor to designated row and column
+static void move_cursor(unsigned int row, unsigned int col) {
+    print("\x1b[");    // 1. Start the ANSI escape sequence
+    print_dec(row);    // 2. Insert the Y coordinate
+    printc(';');       // 3. Separator
+    print_dec(col);    // 4. Insert the X coordinate
+    printc('H');       // 5. Execute the move command
+}
+
+// Call to delete ALL text on entire screen
 void clear_fullscreen() {
     // \x1b[   -> Start escape sequence
     // 2J      -> Clear entire display
@@ -15,6 +26,7 @@ void clear_fullscreen() {
     print("\x1b[H"); 
 }
 
+// Call to delete all text on the graphical display part of the screen
 void clear_display() {
     // Display region sits between rows 4 and 16, columns 2 to 79 (78 characters wide)
     for (int i = 4; i <= 16; i++) {
@@ -25,6 +37,7 @@ void clear_display() {
     }
 }
 
+// Call to delete all text on the text display part of the screen
 void clear_text() {
     // Text region sits between rows 18 and 23, columns 2 to 79 (78 characters wide)
     for (int i = 18; i <= 23; i++) {
@@ -35,14 +48,7 @@ void clear_text() {
     }
 }
 
-void move_cursor(unsigned int row, unsigned int col) {
-    print("\x1b[");    // 1. Start the ANSI escape sequence
-    print_dec(row);    // 2. Insert the Y coordinate
-    printc(';');       // 3. Separator
-    print_dec(col);    // 4. Insert the X coordinate
-    printc('H');       // 5. Execute the move command
-}
-
+// Draw the UI background box with empty graphical/text display and placeholder info bar (XXX)
 void draw_static_ui() {
     // Draw Borders (Rows 1, 3, 17 & 24)
     int rows[] = {1, 3, 17, 24};
@@ -67,6 +73,7 @@ void draw_static_ui() {
     }
 }
 
+// Update info bar to display the current value of success_rate (1 - 3 digits)
 void render_succes_rate(){
     // Update Success rate
     move_cursor(2, 20);
@@ -75,6 +82,7 @@ void render_succes_rate(){
     if (success_rate < 10 ) {printc(' ');}
 }
 
+// Update info bar to display the current value of *place (0 - 11 characters)
 void render_place(){
     // Calculate word length of place
     int length = 0;
@@ -95,6 +103,7 @@ void render_place(){
     }
 }
 
+// Update info bar to display the current value of time (0 - 5999 <=> 00:00 - 99:59)
 void render_time(){
     move_cursor(2, 70);
     if(time < 600) {printc('0');}
@@ -104,6 +113,7 @@ void render_time(){
     print_dec(time % 60);
 }
 
+// Helper function to check if to strings ("rows") are the same
 static int rows_match(const char *s1, const char *s2) {
     while (*s1 && *s2) {
         if (*s1 != *s2) return 0;
@@ -113,6 +123,8 @@ static int rows_match(const char *s1, const char *s2) {
     return (*s1 == *s2);
 }
 
+// Print the input string in the text box with proper formating (string must fit in box)
+// OBS! Doesn't automatically clear old text in the window, make sure to use clear_text();
 void print_text(const char *text) {
     int row = 18;
     int col = 2;
@@ -185,7 +197,7 @@ void print_text(const char *text) {
     }
 }
 
-// Universal "delta-render" gif frame
+// Helper function to draw the next animation frame by only updating rows that changed (delta rendering)
 static void render_gif_delta(const char **gif_data, int rows, int total_frames, int start_row, int start_col, int force_redraw) {
     // Find the previous frame index (wraps around to the last frame)
     int prev_frame;
@@ -213,8 +225,15 @@ static void render_gif_delta(const char **gif_data, int rows, int total_frames, 
     }
 }
 
+// Global variable to keep track if gif has changed
 static int prev_gif_state = -1;
 
+// Call to render the next frame of the currently active ASCII animation.
+//
+// HOW TO ADD A NEW GIF:
+// 1. Create 'const char *new_gif[][...]' in graphics.c and graphics.h
+// 2. Add a new case below and call render_gif_delta() with the new GIF's specifications
+// 3. Start the GIF by setting 'gif_state = [case_num]' anywhere in your code (0 = no GIF playing)
 void play_gif_frame() {
     int force_redraw = 0;
 
