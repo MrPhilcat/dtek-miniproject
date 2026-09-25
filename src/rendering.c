@@ -48,7 +48,7 @@ void draw_static_ui() {
     int rows[] = {1, 3, 17, 24};
     for(int j = 0; j < 4; j++){
         move_cursor(rows[j], 1);
-        print((char*)ui_line);
+        print(ui_line);
     }
     
     // Draw Info (Row 2)
@@ -111,6 +111,78 @@ static int rows_match(const char *s1, const char *s2) {
         s2++;
     }
     return (*s1 == *s2);
+}
+
+void print_text(const char *text) {
+    int row = 18;
+    int col = 2;
+    const int MAX_COL = 79;
+    const int MAX_ROW = 23;
+
+    move_cursor(row, col);
+
+    while (*text != '\0') {
+        // 1. Skip leading spaces if we are at the very start of a line
+        while (col == 2 && *text == ' ') {
+            text++;
+        }
+
+        if (*text == '\0') break;
+
+        // 2. Find the length of the current word
+        // (A word ends at a space, a newline, or the null terminator)
+        int word_len = 0;
+        while (text[word_len] != ' ' && text[word_len] != '\n' && text[word_len] != '\0') {
+            word_len++;
+        }
+
+        // 3. Check if the word fits on the current line
+        if (col + word_len - 1 > MAX_COL) {
+            // If we are not already at the start of the line, wrap down
+            if (col > 2) {
+                row++;
+                if (row > MAX_ROW) return; // Reached the end of the 6x78 text box, stop printing
+                col = 2;
+                move_cursor(row, col);
+                continue; // Re-evaluate this exact same word on the new line
+            }
+            // If col == 2, the word itself is larger than 78 characters.
+            // We fall through and let the print loop truncate/force-break it.
+        }
+
+        // 4. Print the word character by character
+        for (int i = 0; i < word_len; i++) {
+            printc(*text);
+            text++;
+            col++;
+
+            // Failsafe: force a line break if a single massive word exceeds the right edge
+            if (col > MAX_COL && i < word_len - 1) {
+                row++;
+                if (row > MAX_ROW) return; // Text box full
+                col = 2;
+                move_cursor(row, col);
+            }
+        }
+
+        // 5. Handle the space or newline immediately following the word
+        if (*text == ' ') {
+            // Only print the space if it won't bleed past our bounding box
+            if (col <= MAX_COL) {
+                printc(' ');
+                col++;
+            }
+            text++; // Consume the space character
+        } 
+        else if (*text == '\n') {
+            // Respect intentional line breaks in the string
+            row++;
+            if (row > MAX_ROW) return;
+            col = 2;
+            move_cursor(row, col);
+            text++; // Consume the newline character
+        }
+    }
 }
 
 // Universal "delta-render" gif frame
