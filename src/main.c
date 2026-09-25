@@ -62,7 +62,7 @@ void startup(){
     clear_fullscreen();
     hide_cursor();
     draw_static_ui();
-    render_succes_rate();
+    render_success_rate();
     render_place();
     timer_interupt_initialize();
 }

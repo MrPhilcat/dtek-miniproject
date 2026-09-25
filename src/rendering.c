@@ -74,7 +74,7 @@ void draw_static_ui() {
 }
 
 // Update info bar to display the current value of success_rate (1 - 3 digits)
-void render_succes_rate(){
+void render_success_rate(){
     // Update Success rate
     move_cursor(2, 20);
     if (success_rate < 100 ) {printc(' ');}
@@ -194,6 +194,16 @@ void print_text(const char *text) {
             move_cursor(row, col);
             text++; // Consume the newline character
         }
+    }
+}
+
+// Draws a static, single-frame ASCII image at the specified coordinates.
+// OBS! This function does not perform bounds checking. The user is responsible 
+// for ensuring the image does not overwrite UI borders or other parts of the screen.
+void draw_image(const char **image, int num_rows, int start_row, int start_col) {
+    for (int i = 0; i < num_rows; i++) {
+        move_cursor(start_row + i, start_col);
+        print((char*)image[i]);
     }
 }
 

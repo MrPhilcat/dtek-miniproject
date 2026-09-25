@@ -1,9 +1,9 @@
 #ifndef RENDERING_H
 #define RENDERING_H
 
-// =========================
+// ==================================
 // Terminal & Screen Control
-// =========================
+// ==================================
 
 // Call to hide terminal cursor
 void hide_cursor();
@@ -18,15 +18,15 @@ void clear_display();
 void clear_text();
 
 
-// =========================
+// ==================================
 // Static UI & Info Bar
-// =========================
+// ==================================
 
 // Draw the UI background box with empty graphical/text display and placeholder info bar (XXX)
 void draw_static_ui();
 
 // Update info bar to display the current value of success_rate (1 - 3 digits)
-void render_succes_rate();
+void render_success_rate();
 
 // Update info bar to display the current value of *place (0 - 11 characters)
 void render_place();
@@ -35,13 +35,17 @@ void render_place();
 void render_time();
 
 
-// =========================
-// Text & Animation Rendering
-// =========================
+// ==================================
+// Text, Image & Animation Rendering
+// ==================================
 
 // Print the input string in the text box with proper formatting (string must fit in box).
 // OBS! Doesn't automatically clear old text in the window; make sure to use clear_text() first.
 void print_text(const char *text);
+
+// Draws a static, single-frame ASCII image at the specified coordinates.
+// OBS! Does not perform bounds checking. Ensure it fits within intended display areas.
+void draw_image(const char **image, int num_rows, int start_row, int start_col);
 
 // Call to render the next frame of the currently active ASCII animation.
 //
@@ -52,4 +56,4 @@ void print_text(const char *text);
 // 3. Start the GIF by setting 'gif_state = [case_num]' anywhere in your code (0 = no GIF playing)
 void play_gif_frame();
 
-#endif // RENDERING_H
+#endif
