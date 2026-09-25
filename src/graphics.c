@@ -5,6 +5,7 @@
 // 'const' ensures it stays safely in Flash memory.
 const char *ui_line = "+==============================================================================+";
 const char *ui_info = "|    Success rate: XXX%    |    Location: XXXXXXXXXXX    |     Time: XX:XX     |";
+const char *empty_row78 = "                                                                              ";
 
 // gif_state = 1 (5 frames total, 12 rows each, 27 chars wide)
 const char *test_gif[][12] = {

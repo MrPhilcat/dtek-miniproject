@@ -7,12 +7,32 @@ void hide_cursor(){
     print("\x1b[?25l");
 }
 
-void clear_screen() {
+void clear_fullscreen() {
     // \x1b[   -> Start escape sequence
     // 2J      -> Clear entire display
     print("\x1b[2J");
     // \x1b[H  -> Move cursor to home position (Row 1, Col 1)
     print("\x1b[H"); 
+}
+
+void clear_display() {
+    // Display region sits between rows 4 and 16, columns 2 to 79 (78 characters wide)
+    for (int i = 4; i <= 16; i++) {
+        move_cursor(i, 2);
+        for (int j = 0; j < 78; j++) {
+            printc(' ');
+        }
+    }
+}
+
+void clear_text() {
+    // Text region sits between rows 18 and 23, columns 2 to 79 (78 characters wide)
+    for (int i = 18; i <= 23; i++) {
+        move_cursor(i, 2);
+        for (int j = 0; j < 78; j++) {
+            printc(' ');
+        }
+    }
 }
 
 void move_cursor(unsigned int row, unsigned int col) {
@@ -104,7 +124,7 @@ static void render_gif_delta(const char **gif_data, int rows, int total_frames, 
     }
 
     for (int i = 0; i < rows; i++) {
-        // Flatten the 2D array index mathematically to support any row count
+        // Interprit input array according to its totalt amount of rows
         const char *current_row_str = gif_data[gif_frame * rows + i];
         const char *prev_row_str    = gif_data[prev_frame * rows + i];
 

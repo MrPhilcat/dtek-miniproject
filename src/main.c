@@ -59,7 +59,7 @@ void handle_interrupt(unsigned cause){
 }
 
 void startup(){
-    clear_screen();
+    clear_fullscreen();
     hide_cursor();
     draw_static_ui();
     render_succes_rate();

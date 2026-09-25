@@ -3,7 +3,9 @@
 
 // Function prototypes
 void hide_cursor();
-void clear_screen();
+void clear_fullscreen();
+void clear_display();
+void clear_text();
 void move_cursor(unsigned int row, unsigned int col);
 void draw_static_ui();
 void render_succes_rate();
