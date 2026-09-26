@@ -7,5 +7,6 @@
 extern const char *ui_line;
 extern const char *ui_info;
 extern const char *test_gif[][12];
+extern const char *skyscraper_wide_gif[][13];
 
 #endif

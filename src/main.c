@@ -11,6 +11,7 @@ char *place = "Elevator";
 unsigned int time = 0;
 int gif_state = 0;
 int gif_frame = 0;
+GameContext game;
 
 //Local Variables
 char timeoutcount = 0;
@@ -21,6 +22,8 @@ volatile char render_gif_flag = 0;
 #define TIMER_CONTROL  (*(volatile unsigned short*)(0x04000024))
 #define TIMER_PERIOD_L (*(volatile unsigned short*)(0x04000028))
 #define TIMER_PERIOD_H (*(volatile unsigned short*)(0x0400002C))
+
+#define BUTTON (*(volatile unsigned int*)(0x04000010))
 
 /* Code for initializing interrupts. */
 void timer_interupt_initialize(void){
@@ -67,15 +70,43 @@ void startup(){
     timer_interupt_initialize();
 }
 
+void init_game(void){
+    game.current_state = STATE_INTRO;
+    game.location = LOCATION_ELEVATOR;
+    game.inventory_count = 0;
+    game.success_rate = 0;
+}
+
+int get_button_state(){
+    static unsigned int last_button_state = 0;
+    unsigned int current_button_state = BUTTON & 0x1;
+
+    if (current_button_state && !last_button_state) {
+        last_button_state = current_button_state;
+        return 1;
+    } else {
+        last_button_state = current_button_state;
+        return 0;
+    }
+}
+
 int main(void) {
     // Main program loop will go here
     startup();
+    init_game();
+    const char *text = "You are a police and are taked with helping some people.";
+    print_text(text);
+
 
     gif_state = 1;
     while(1) {
+        
+        
+
         // Check if an interrupt signaled a new frame
         if (render_gif_flag) {
             render_gif_flag = 0; // Clear the flag
+            gif_state = 2;
             play_gif_frame();
         }
 

@@ -40,18 +40,20 @@ typedef enum
 
 typedef enum
 {
-  DIALOGUE_APPROACH = 0,
-  DIALOGUE_DEMAND_COPTER,
-  DIALOGUE_GUN_DECISION,
-  DIALOGUE_FINAL_CHOICE
-} BalconyStageID;
+  LOCATION_ELEVATOR = 0,
+  LOCATION_LOBBY,
+  LOCATION_KITCHEN,
+  LOCATION_LIVING_ROOM,
+  LOCATION_BEDROOM,
+  LOCATION_BATHROOM,
+  LOCATION_BALCONY
+} LocationID;
 
 typedef struct
 {
   MainStateID current_state;
-  BalconyStageID balcony_stage;
 
-  int location;
+  LocationID location;
   int clues_discovered[TOTAL_CLUES];
   ItemID inventory[INVENTORY_CAPACITY];
   int inventory_count;
@@ -59,5 +61,7 @@ typedef struct
   int success_rate;
   int time;
 } GameContext;
+
+extern GameContext game;
 
 #endif

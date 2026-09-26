@@ -261,6 +261,7 @@ void play_gif_frame() {
             break;
 
         case 2:
+            render_gif_delta((const char **)skyscraper_wide_gif, 13, 4, 4, 14, force_redraw);
             break;
 
         case 3:
