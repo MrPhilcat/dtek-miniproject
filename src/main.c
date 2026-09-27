@@ -71,7 +71,6 @@ void startup(){
 }
 
 void init_game(void){
-    game.current_state = STATE_INTRO;
     game.location = LOCATION_ELEVATOR;
     game.inventory_count = 0;
     game.success_rate = 0;

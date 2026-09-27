@@ -32,15 +32,8 @@ typedef enum
 
 typedef enum
 {
-  STATE_INTRO = 0,
-  STATE_INVESTIGATION,
-  STATE_BALCONY_STANDOFF,
-  STATE_ENDING
-} MainStateID;
-
-typedef enum
-{
-  LOCATION_ELEVATOR = 0,
+  LOCATION_OUTSIDE = 0,
+  LOCATION_ELEVATOR,
   LOCATION_LOBBY,
   LOCATION_KITCHEN,
   LOCATION_LIVING_ROOM,
@@ -51,7 +44,6 @@ typedef enum
 
 typedef struct
 {
-  MainStateID current_state;
 
   LocationID location;
   int clues_discovered[TOTAL_CLUES];
