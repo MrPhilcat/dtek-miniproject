@@ -44,7 +44,7 @@ typedef enum
 
 typedef struct
 {
-
+  int scene_index;
   LocationID location;
   int clues_discovered[TOTAL_CLUES];
   ItemID inventory[INVENTORY_CAPACITY];
@@ -54,6 +54,7 @@ typedef struct
   int time;
 } GameContext;
 
+const char *get_location_name(LocationID location);
 extern GameContext game;
 
 #endif
