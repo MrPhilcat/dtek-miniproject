@@ -70,6 +70,8 @@ void startup(){
     render_success_rate();
     render_place();
     timer_interupt_initialize();
+
+    init_game();
 }
 
 void init_game(void){
@@ -126,7 +128,6 @@ int main(void)
 {
     // Main program loop will go here
     startup();
-    init_game();
     update_scene();
     
 
