@@ -93,23 +93,20 @@ int main(void) {
     // Main program loop will go here
     startup();
     init_game();
-    const char *text = "You are a police and are taked with helping some people.";
+    const char *text = "The deviant is on the edge of the balcony with the hostage and threatens to jump. Just do your job, machine, and get this over with.' He turns his back, dismissing you.";
     print_text(text);
 
 
-    gif_state = 1;
+    gif_state = 2;
     while(1) {
-        
-        
-
         // Check if an interrupt signaled a new frame
         if (render_gif_flag) {
             render_gif_flag = 0; // Clear the flag
-            gif_state = 2;
             play_gif_frame();
         }
 
         // Other non-blocking game logic goes here
+        
     }
     return 0;
 }

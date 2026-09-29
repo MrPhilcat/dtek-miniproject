@@ -71,7 +71,7 @@ const char *test_gif[][12] = {
     "-...----==-------===-----.."}
 };
 
-// skyscraper_wide_gif = 4 frames, 13 rows each, 54 chars wide
+// skyscraper_wide_gif = 2 (4 frames, 13 rows each, 54 chars wide)
 const char *skyscraper_wide_gif[][13] = {
    // Frame 0: Lampa av
    {"             .        |          |        .           ",

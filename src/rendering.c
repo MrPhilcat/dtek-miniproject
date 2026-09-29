@@ -127,7 +127,7 @@ static int rows_match(const char *s1, const char *s2) {
 // OBS! Doesn't automatically clear old text in the window, make sure to use clear_text();
 void print_text(const char *text) {
     int row = 18;
-    int col = 2;
+    int col = 3;
     const int MAX_COL = 79;
     const int MAX_ROW = 23;
 
@@ -135,7 +135,7 @@ void print_text(const char *text) {
 
     while (*text != '\0') {
         // 1. Skip leading spaces if we are at the very start of a line
-        while (col == 2 && *text == ' ') {
+        while (col == 3 && *text == ' ') {
             text++;
         }
 
@@ -151,10 +151,10 @@ void print_text(const char *text) {
         // 3. Check if the word fits on the current line
         if (col + word_len - 1 > MAX_COL) {
             // If we are not already at the start of the line, wrap down
-            if (col > 2) {
+            if (col > 3) {
                 row++;
                 if (row > MAX_ROW) return; // Reached the end of the 6x78 text box, stop printing
-                col = 2;
+                col = 3;
                 move_cursor(row, col);
                 continue; // Re-evaluate this exact same word on the new line
             }
@@ -172,7 +172,7 @@ void print_text(const char *text) {
             if (col > MAX_COL && i < word_len - 1) {
                 row++;
                 if (row > MAX_ROW) return; // Text box full
-                col = 2;
+                col = 3;
                 move_cursor(row, col);
             }
         }
@@ -190,7 +190,7 @@ void print_text(const char *text) {
             // Respect intentional line breaks in the string
             row++;
             if (row > MAX_ROW) return;
-            col = 2;
+            col = 3;
             move_cursor(row, col);
             text++; // Consume the newline character
         }
