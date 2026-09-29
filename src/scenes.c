@@ -17,7 +17,7 @@ const Scene story_scenes[] = {
       .option_count = 1, 
       .options = {{"Greet the officer", 2}}, 
       .success_rate_modifier = 0, 
-      .gif_state_number = 2},
+      .gif_state_number = 0},
     {
         .SceneId = 2,
         .location = LOCATION_LOBBY,

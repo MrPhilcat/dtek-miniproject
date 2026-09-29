@@ -1,6 +1,8 @@
 #ifndef RENDERING_H
 #define RENDERING_H
 
+#include "scenes.h"
+
 // ==================================
 // Terminal & Screen Control
 // ==================================
@@ -42,6 +44,8 @@ void render_time();
 // Print the input string in the text box with proper formatting (string must fit in box).
 // OBS! Doesn't automatically clear old text in the window; make sure to use clear_text() first.
 void print_text(const char *text);
+
+void print_options(Option options);
 
 // Draws a static, single-frame ASCII image at the specified coordinates.
 // OBS! Does not perform bounds checking. Ensure it fits within intended display areas.

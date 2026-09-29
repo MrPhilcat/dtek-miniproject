@@ -197,6 +197,12 @@ void print_text(const char *text) {
     }
 }
 
+void print_options(Option options) {
+    
+}
+
+
+
 // Draws a static, single-frame ASCII image at the specified coordinates.
 // OBS! This function does not perform bounds checking. The user is responsible 
 // for ensuring the image does not overwrite UI borders or other parts of the screen.
