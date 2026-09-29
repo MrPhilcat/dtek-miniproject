@@ -74,7 +74,7 @@ void startup(){
     init_game();
 }
 
-void init_game(void){
+void init_game(){
     game.scene_index = 0;
     Scene scene_struct = story_scenes[game.scene_index];
     place = (char *)get_location_name(game.location);
