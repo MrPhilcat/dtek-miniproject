@@ -24,15 +24,15 @@ volatile char render_gif_flag = 0;
 #define TIMER_PERIOD_L (*(volatile unsigned short*)(0x04000028))
 #define TIMER_PERIOD_H (*(volatile unsigned short*)(0x0400002C))
 
-#define BUTTON (*(volatile unsigned int*)(0x04000010))
-#define SWITCHES (*(volatile unsigned int *)(0x04000000))
+#define SWITCHES (*(volatile unsigned int*)(0x04000010))
+#define BUTTON (*(volatile unsigned int*)(0x040000d0))
 
 /* Code for initializing interrupts. */
 void timer_interupt_initialize(void){
   
-  // Set period to 3 000 000 (1/10 of frequency)
-  TIMER_PERIOD_L = 0xC6C0;
-  TIMER_PERIOD_H = 0x2D;
+  // Set period to 10 000 000 (1/3 of frequency)
+  TIMER_PERIOD_L = 0x9680;
+  TIMER_PERIOD_H = 0x98;
 
   // Clear old timeout flag (if any)
   TIMER_STATUS = 0b0;
@@ -50,13 +50,11 @@ void handle_interrupt(unsigned cause){
     TIMER_STATUS = 0;
 
     // Allow playing next gif frame (if any)
-    if(timeoutcount % 2){
-        render_gif_flag = 1;
-    }
+    render_gif_flag = 1;
     
     // Timer Logic
     timeoutcount++;
-    if(timeoutcount >= 10){
+    if(timeoutcount >= 3){
         timeoutcount = 0; 
         time++;
         render_time();
@@ -71,41 +69,39 @@ void startup(){
     render_place();
     timer_interupt_initialize();
 
-    init_game();
-}
-
-void init_game(){
     game.scene_index = 0;
-    Scene scene_struct = story_scenes[game.scene_index];
     place = (char *)get_location_name(game.location);
     render_place();
     game.inventory_count = 0;
     game.success_rate = 50;
 }
 
-int get_button_state(){
-    static unsigned int last_button_state = 0;
-    unsigned int current_button_state = BUTTON & 0x1;
-
-    if (current_button_state && !last_button_state) {
-        last_button_state = current_button_state;
-        return 1;
-    } else {
-        last_button_state = current_button_state;
-        return 0;
-    }
-}
-
-unsigned int get_switch_state(){
+int get_switch_state(){
     static unsigned int last_switch_state = 0;
     unsigned int current_switch_state = SWITCHES & 0x1;
 
     if (current_switch_state && !last_switch_state) {
         last_switch_state = current_switch_state;
         return 1;
-    }
-    else {
+    } else {
         last_switch_state = current_switch_state;
+        return 0;
+    }
+}
+
+int get_button_state()
+{
+    static unsigned int last_button_state = 0;
+    unsigned int current_button_state = BUTTON & 0x1;
+
+    if (current_button_state && !last_button_state)
+    {
+        last_button_state = current_button_state;
+        return 1;
+    }
+    else
+    {
+        last_button_state = current_button_state;
         return 0;
     }
 }
@@ -132,19 +128,17 @@ int main(void)
     
 
 
-    gif_state = 2;
+    gif_state = 3;
     while(1) {
-        int button_state = get_button_state();
         int switch_state = get_switch_state();
 
-        if (button_state) {
+        
+        if (switch_state) {
             update_scene();
         }
-        
 
-            // Check if an interrupt signaled a new frame
-            if (render_gif_flag)
-        {
+        // Check if an interrupt signaled a new frame
+        if (render_gif_flag){
             render_gif_flag = 0; // Clear the flag
             play_gif_frame();
         }

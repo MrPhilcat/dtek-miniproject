@@ -54,7 +54,7 @@ void draw_static_ui() {
     int rows[] = {1, 3, 17, 24};
     for(int j = 0; j < 4; j++){
         move_cursor(rows[j], 1);
-        print(ui_line);
+        print((char*)ui_line);
     }
     
     // Draw Info (Row 2)
@@ -267,10 +267,13 @@ void play_gif_frame() {
             break;
 
         case 2:
+            // skyscraper_wide_gif: 13 rows, 4 frames. Drawn at row 4, col 27.
             render_gif_delta((const char **)skyscraper_wide_gif, 13, 4, 4, 14, force_redraw);
             break;
 
         case 3:
+            // elevator_gif: 13 rows, 3 frames. Drawn at row 4, col 2.
+            render_gif_delta((const char **)elevator_gif, 13, 3, 4, 2, force_redraw);
             break;
 
         default:
