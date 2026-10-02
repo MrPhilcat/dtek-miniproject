@@ -4,12 +4,11 @@ const Scene story_scenes[] = {
     {
       .SceneId = 0,
       .location = LOCATION_OUTSIDE,
-      .description = "You are an android helping police officers. A rogue android has taken a young girl hostage on a balcony. Every second counts.",
+      .description = "You are an android helping police officers. A rogue android has taken a young girl hostage on a balcony. Every second counts. \n\n >[Enter the building and go the elevator]",
       .option_count = 1,
-      .options = {
-         {"Enter the building and go to the elevator", 1}},
+      .options = {{"", 2}},
       .success_rate_modifier = 0,
-      .gif_state_number = 1},
+      .gif_state_number = 2},
     {
       .SceneId = 1, 
       .location = LOCATION_ELEVATOR, 
@@ -17,7 +16,7 @@ const Scene story_scenes[] = {
       .option_count = 1, 
       .options = {{"Greet the officer", 2}}, 
       .success_rate_modifier = 0, 
-      .gif_state_number = 0},
+      .gif_state_number = 3},
     {
         .SceneId = 2,
         .location = LOCATION_LOBBY,

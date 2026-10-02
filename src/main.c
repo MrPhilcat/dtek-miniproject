@@ -13,10 +13,12 @@ unsigned int time = 0;
 int gif_state = 0;
 int gif_frame = 0;
 GameContext game;
+volatile int current_option = 0;
 
 //Local Variables
 char timeoutcount = 0;
 volatile char render_gif_flag = 0;
+
 
 // Define addrsses for timer values
 #define TIMER_STATUS   (*(volatile unsigned short*)(0x04000020))
@@ -58,6 +60,10 @@ void handle_interrupt(unsigned cause){
         timeoutcount = 0; 
         time++;
         render_time();
+        if (!(time % 10)){
+            success_rate--;
+            render_success_rate();
+        }
     }
 }
 
@@ -74,6 +80,8 @@ void startup(){
     render_place();
     game.inventory_count = 0;
     game.success_rate = 50;
+    print_text(story_scenes[game.scene_index].description);
+    gif_state = story_scenes[game.scene_index].gif_state_number;
 }
 
 int get_switch_state(){
@@ -107,11 +115,21 @@ int get_button_state()
 }
 
 void update_scene() {
-    game.scene_index++;
+    // Go to next scene based on selected option
+    game.scene_index = story_scenes[game.scene_index].options[current_option].nextSceneId;
+    current_option = 0;
+
     Scene scene_struct = story_scenes[game.scene_index];
 
     clear_text();
-    print_text(scene_struct.description);
+    clear_display();
+
+    if (story_scenes[game.scene_index].option_count > 1){
+        
+    }
+    else{
+        print_text(scene_struct.description);
+    }
 
     place = (char *)get_location_name(scene_struct.location);
     render_place();
@@ -124,14 +142,14 @@ int main(void)
 {
     // Main program loop will go here
     startup();
-    update_scene();
     
-
-
-    gif_state = 3;
     while(1) {
         int switch_state = get_switch_state();
+        int button_state = get_button_state();
 
+        if (button_state) {
+            current_option = (current_option + 1) % story_scenes[game.scene_index].option_count;
+        }
         
         if (switch_state) {
             update_scene();

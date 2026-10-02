@@ -7,6 +7,7 @@
 // Rendering Logic
 extern int gif_state;
 extern int gif_frame;
+extern volatile int current_option;
 
 // Game Logic
 extern unsigned int success_rate;

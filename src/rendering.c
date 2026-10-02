@@ -198,7 +198,6 @@ void print_text(const char *text) {
 }
 
 void print_options(Option options) {
-    
 }
 
 

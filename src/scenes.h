@@ -18,6 +18,7 @@ typedef struct
   Option options[4];
   int success_rate_modifier;
   int gif_state_number;
+  int option_index;
 } Scene;
 
 extern const Scene story_scenes[];
