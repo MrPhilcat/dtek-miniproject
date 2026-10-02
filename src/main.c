@@ -131,6 +131,15 @@ void update_scene() {
         print_text(scene_struct.description);
     }
 
+    if (story_scenes[game.scene_index].itemId != 0){
+        game.inventory[story_scenes[game.scene_index].itemId] = story_scenes[game.scene_index].itemId;
+    };
+
+    if (story_scenes[game.scene_index].clueId != 0)
+    {
+        game.inventory[story_scenes[game.scene_index].clueId] = story_scenes[game.scene_index].clueId;
+    };
+
     place = (char *)get_location_name(scene_struct.location);
     render_place();
     success_rate += scene_struct.success_rate_modifier;
