@@ -2,7 +2,7 @@
 
 const Scene story_scenes[] = {
     {
-      .SceneId = 0,
+      .SceneId = 20,
       .location = LOCATION_OUTSIDE,
       .description = "You are an android helping police officers. A rogue android has taken a young girl hostage on a balcony. Every second counts. \n\n >[Enter the building and go the elevator]",
       .option_count = 1,
@@ -10,11 +10,18 @@ const Scene story_scenes[] = {
       .success_rate_modifier = 0,
       .gif_state_number = 2},
     {
-      .SceneId = 1, 
+      .SceneId = 21,
+      .location = LOCATION_OUTSIDE,
+      .description = "Why are you outside? go to the elevator. \n\n >[Enter the building and go the elevator]",
+      .option_count = 1,
+      .options = {{"", 2}},
+      .success_rate_modifier = 0,
+      .gif_state_number = 2},
+    {
+      .SceneId = 22, 
       .location = LOCATION_ELEVATOR, 
-      .description = "You step into the elevator as it ascends. The doors slide open onto a chaotic apartment filled with shouting officers and blood on the floor.", 
-      .option_count = 1, 
-      .options = {{"Greet the officer", 2}}, 
+      .option_count = 2, 
+      .options = {{"Greet the officer", 3}, {"Go outside", 1}}, 
       .success_rate_modifier = 0, 
       .gif_state_number = 3},
     {
@@ -31,6 +38,17 @@ const Scene story_scenes[] = {
     // Scene 3: Talking to officer - Part 2
     {
         .SceneId = 3,
+        .location = LOCATION_LOBBY,
+        .description = "'The deviant is on the edge of the balcony with the hostage and threatens to jump. Just do your job, machine, and get this over with.' He turns his back, dismissing you.",
+        .option_count = 1,
+        .options = {
+            {"Go to the kitchen", 4} // Leads to the Kitchen scene
+        },
+        .success_rate_modifier = 0,
+        .gif_state_number = 2
+    },
+    {
+        .SceneId = 4,
         .location = LOCATION_LOBBY,
         .description = "'The deviant is on the edge of the balcony with the hostage and threatens to jump. Just do your job, machine, and get this over with.' He turns his back, dismissing you.",
         .option_count = 1,

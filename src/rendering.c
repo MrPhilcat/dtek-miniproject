@@ -197,7 +197,18 @@ void print_text(const char *text) {
     }
 }
 
-void print_options(Option options) {
+void print_options(Scene scene) {
+    for(int i = 0; i < scene.option_count; i++){
+        move_cursor(18 + i, 3);
+        if(i == current_option){
+            printc('>');
+        } 
+        else{
+            printc(' ');
+        }
+        print(scene.options[i].text);
+    }
+    
 }
 
 

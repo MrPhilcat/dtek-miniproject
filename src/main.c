@@ -125,7 +125,7 @@ void update_scene() {
     clear_display();
 
     if (story_scenes[game.scene_index].option_count > 1){
-        
+        print_options(scene_struct);
     }
     else{
         print_text(scene_struct.description);
@@ -148,7 +148,10 @@ int main(void)
         int button_state = get_button_state();
 
         if (button_state) {
-            current_option = (current_option + 1) % story_scenes[game.scene_index].option_count;
+            if(story_scenes[game.scene_index].option_count > 1){
+                current_option = (current_option + 1) % story_scenes[game.scene_index].option_count;
+                print_options(story_scenes[game.scene_index]);
+            }
         }
         
         if (switch_state) {
