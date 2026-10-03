@@ -116,6 +116,55 @@ int get_button_state()
 
 void update_scene() {
     // Go to next scene based on selected option
+    if (game.scene_index == SCENE_BALCONY_INTERMEDIARY_1) {
+        int has_name = 0;
+        int has_gun = 0;
+
+        if (game.clues_discovered[CLUE_DEVIANT_NAME] == CLUE_DEVIANT_NAME){
+            has_name = 1;
+        }
+
+        if (game.inventory[ITEM_GUN] == ITEM_GUN){
+            has_gun = 1;
+        }
+
+        if (has_name && has_gun)
+        {
+            game.scene_index = SCENE_BALCONY_MENU_BOTH;
+        }
+        else if (has_name)
+        {
+            game.scene_index = SCENE_BALCONY_MENU_NAME;
+        }
+        else if (has_gun)
+        {
+            game.scene_index = SCENE_BALCONY_MENU_GUN;
+        }
+        else
+        {
+            game.scene_index = SCENE_BALCONY_MENU_NONE;
+        }
+    }
+
+    // CHECKER 2: Vilken dialogmeny ska vi visa?
+    else if (game.scene_index == SCENE_BALCONY_INTERMEDIARY_2)
+    {
+        int knows_emma = 0; // (Eller om hon har ett ITEM_EMMAS_TABLET)
+
+        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME){
+            knows_emma = 1;
+        }
+
+        if (knows_emma)
+        {
+            game.scene_index = SCENE_BALCONY_DIALOGUE_1_MENU_EMMA;
+        }
+        else
+        {
+            game.scene_index = SCENE_BALCONY_DIALOGUE_1_MENU_NONE;
+        }
+    }
+
     game.scene_index = story_scenes[game.scene_index].options[current_option].nextSceneId;
     current_option = 0;
 
@@ -139,6 +188,8 @@ void update_scene() {
     {
         game.inventory[story_scenes[game.scene_index].clueId] = story_scenes[game.scene_index].clueId;
     };
+
+
 
     place = (char *)get_location_name(scene_struct.location);
     render_place();
