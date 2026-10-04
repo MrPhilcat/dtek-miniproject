@@ -8,9 +8,8 @@ const char *ui_info =  "|*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*.*
 const char *ui_info2 = "|    Success rate: XXX%    |    Location: XXXXXXXXXXX    |     Time: XX:XX     |";
 const char *empty_row78 = "                                                                              ";
 
-//gif_state = 1 (6 frames total, 13 rows each, 78 chars wide)
+// gif_state = 1 (6 frames total, 13 rows each, 78 chars wide)
 const char *detroit_loading_gif[][13] = {
-    // Frame 1: Empty Screen
     {"                                                                              ",
      "                                                                              ",
      "                                                                              ",
@@ -24,8 +23,7 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              ",
      "                                                                              ",
      "                                                                              "},
-     
-    // Frame 2: LED Ring and Subtitle fade in
+
     {"                                                                              ",
      "                                                                              ",
      "                                                   ░░░░░                      ",
@@ -40,7 +38,6 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              ",
      "                                                                              "},
 
-    // Frame 3: "D E" blocks start to load
     {"                                                                              ",
      "                                                                              ",
      "     ████████▄  █████████                          ░░░░░                      ",
@@ -55,7 +52,6 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              ",
      "                                                                              "},
 
-    // Frame 4: "T R" blocks load, connecting to the LED Ring (O)
     {"                                                                              ",
      "                                                                              ",
      "     ████████▄  █████████  █████████  ████████▄    ░░░░░                      ",
@@ -70,7 +66,6 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              ",
      "                                                                              "},
 
-    // Frame 5: "I T" finish loading, full logo revealed
     {"                                                                              ",
      "                                                                              ",
      "     ████████▄  █████████  █████████  ████████▄    ░░░░░    ██  █████████     ",
@@ -85,7 +80,6 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              ",
      "                                                                              "},
 
-    // Frame 6: LED Ring turns blue
     {"                                                                              ",
      "                                                                              ",
      "     ████████▄  █████████  █████████  ████████▄    \x1b[94m░░░░░\x1b[0m    ██  █████████     ",
@@ -101,9 +95,8 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              "}
 };
 
-// skyscraper_wide_gif = 2 (4 frames, 13 rows each, 54 chars wide)
+// gif_state = 2 (4 frames total, 13 rows each, 54 chars wide)
 const char *skyscraper_wide_gif[][13] = {
-    // Frame 0: Lampa av
     {"             .        |          |        .           ",
      "        .            _|_        _|_                   ",
      "                    |   |      |   |            .     ",
@@ -118,7 +111,6 @@ const char *skyscraper_wide_gif[][13] = {
      "               |   |      | . . |   |   |       .     ",
      "===============|===|======|     |===|===|============="},
 
-    // Frame 1: Lampa PÅ (stjärnor flyttar ner)
     {"                      |          |                    ",
      "             .       _|_        _|_       .           ",
      "        .           |   |      |   |                  ",
@@ -133,7 +125,6 @@ const char *skyscraper_wide_gif[][13] = {
      "               |   |      | . . |   |   |             ",
      "===============|===|======|     |===|===|============="},
 
-    // Frame 2: Lampa PÅ (stjärnor flyttar ner)
     {"        .             |          |                    ",
      "                     _|_        _|_                   ",
      "             .      |   |      |   |      .           ",
@@ -148,7 +139,6 @@ const char *skyscraper_wide_gif[][13] = {
      "  .            |   |      | . . |   |   |             ",
      "===============|===|======|     |===|===|============="},
 
-    // Frame 3: Lampa av (stjärnor flyttar ner)
     {"             .        |          |            .       ",
      "        .            _|_        _|_                   ",
      "                    |   |      |   |                  ",
@@ -163,9 +153,8 @@ const char *skyscraper_wide_gif[][13] = {
      "               |   |      | . . |   |   |             ",
      "===============|===|======|     |===|===|============="}};
 
-// elevator_gif = 3 (3 frames total, 13 rows each, 78 chars wide)
+// gif_state = 3 (3 frames total, 13 rows each, 78 chars wide)
 const char *elevator_gif[][13] = {
-    // Frame 0: Display normal, button unlit
     {"                                                                              ",
      "                .==========.------[ < 04 > ]------.==========.                ",
      "                ||==========================================||                ",
@@ -180,7 +169,6 @@ const char *elevator_gif[][13] = {
      "                ||__|_________________||_________________|__||                ",
      "________._______||____________________||____________________||_______.________"},
 
-    // Frame 1: Display blinks off, button lights up (phase 1)
     {"                                                                              ",
      "                .==========.------[        ]------.==========.                ",
      "                ||==========================================||                ",
@@ -195,7 +183,6 @@ const char *elevator_gif[][13] = {
      "                ||__|_________________||_________________|__||                ",
      "________._______||____________________||____________________||_______.________"},
 
-    // Frame 2: Display arrows change, button lights up (phase 2)
     {"                                                                              ",
      "                .==========.------[ > 04 < ]------.==========.                ",
      "                ||==========================================||                ",
@@ -210,6 +197,7 @@ const char *elevator_gif[][13] = {
      "                ||__|_________________||_________________|__||                ",
      "________._______||____________________||____________________||_______.________"}};
 
+// gif_state = 4 (1 frame total, 9 rows each, 18 chars wide)
 const char *animal_head[][9] = {
     {"             ,",
      "        _.-\"` `'-.",
@@ -221,6 +209,7 @@ const char *animal_head[][9] = {
      "     .--'`:._]",
      "    /  \\      '-."}};
 
+// gif_state = 5 (1 frame total, 13 rows each, 78 chars wide)
 const char *library_hallway_scene[][13] = {
     {"               |.'.'.'.'.|===;                 ;===|.'.'.'.'.|                ",
      "               |.'.'.'.'.|:::|',             ,'|:::|.'.'.'.'.|                ",
@@ -236,7 +225,7 @@ const char *library_hallway_scene[][13] = {
      "               |.'.','         /%%%%%%%%%%%%%\\         ','.'.|                ",
      "               |.','          /%%%%%%%%%%%%%%%\\          ','.|                "}};
 
-// kitchen_scene (1 frame, 14 rows, exactly 78 columns wide)
+// gif_state = 6 (1 frame total, 14 rows each, 78 chars wide)
 const char *kitchen_scene[][14] = {
     {"        ____   ____   ____   ____             ____          ___               ",
      "       |    | |    | |    | |    |           /||\\ \\  /      \\  |              ",
@@ -246,14 +235,14 @@ const char *kitchen_scene[][14] = {
      "       ##############################||___||___||#################            ",
      "       ###########################################################            ",
      "       ################################_#########/ _ \\##########              ",
-     "      /                               _  / \\  _  \\___/         \\              ",
+     "      /       \x1b[33m[====]\x1b[0m                  _  / \\  _  \\___/         \\              ",
      "     /_______________________________/_/\\___/\\_\\________________\\             ",
      "       /|| . : __ __ \\=:| |--------------| | *  *  *  * | |------|            ",
      "   ----/ /||              | |              | |[==========]| |------|          ",
      "         | | ||           | |    | |       | |[   ===   ]| |    | |           ",
      "         | | ||           | |     |        | |[---------]| |    | |           "}};
 
-// sofa_and_table_scene (1 frame, 13 rows, exactly 78 columns wide)
+// gif_state = 7 (1 frame total, 13 rows each, 78 chars wide)
 const char *sofa_and_table_scene[][13] = {
     {"                  ___.--------'``````:``````'--------.___                     ",
      "                 (   |               :               |   )                    ",
@@ -267,25 +256,25 @@ const char *sofa_and_table_scene[][13] = {
      "                /_|       /_____________________\\       |_\\                   ",
      "                          [_____________________]                             ",
      "                           | |               | |                              ",
-     "                           |_|               |_|                              "}};
+     "                           |_|     \x1b[31m_,-'\x1b[0m      |_|                              "}};
 
-     // desk_book_apple_scene (1 frame, 13 rows, exactly 78 columns wide)
+// gif_state = 8 (1 frame total, 13 rows each, 78 chars wide)
 const char *desk_book_apple_scene[][13] = {
     {"                                                                              ",
      "                                                                              ",
      "    _____                                                                     ",
      "   /    /|_ ___________________________________________                       ",
      "  /    // /|                                          /|                      ",
-     " (====|/ //          ____ ____             _QP_      / |                      ",
-     "  (=====|/         _/    Y    \\_         (  ' )    / .|                      ",
-     " (====|/          //____.|.____\\\\          \\__/    / /||                      ",
+     " (====|/ //          \x1b[36m____ ____\x1b[0m             _QP_      / |                      ",
+     "  (=====|/         \x1b[36m_/    Y    \\_\x1b[0m         (  ' )    / .|                      ",
+     " (====|/          \x1b[36m//____.|.____\\\\\x1b[0m          \\__/    / /||                      ",
      " /_________________________________________________/ / ||                    ",
      " |  _____________________________________________  ||  ||                     ",
      " | ||                                            | ||                         ",
      " | ||                                            | ||                         ",
      " | |                                             | |                          "}};
 
-// bathroom_scene (1 frame, 13 rows, exactly 78 columns wide)
+// gif_state = 9 (1 frame total, 13 rows each, 78 chars wide)
 const char *bathroom_scene[][13] = {
     {"                                                                              ",
      "               .-----------------.                                            ",
@@ -301,11 +290,10 @@ const char *bathroom_scene[][13] = {
      " ____|___________________________________|___________|_________|_____________ ",
      "                                                                              "}};
 
-// gif_state = 99 (14 frames total, 19 rows each, 78 chars wide
-// The crosshair aims at the man in frames 3 and 11
+// gif_state = 99 (14 frames total, 19 rows each, 78 chars wide)
 const char *aiming_gif[][19] = {
-    { // Frame 0
-     "0                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -324,8 +312,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 1
-     "1                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -344,8 +332,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 2
-     "2                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -364,8 +352,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 3 (Aiming at Man)
-     "3                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -384,8 +372,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 4
-     "4                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -404,8 +392,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 5
-     "5                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -424,8 +412,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 6
-     "6                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -444,8 +432,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 7
-     "7                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -464,8 +452,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 8
-     "8                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -484,8 +472,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 9
-     "9                                                                             ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -504,8 +492,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 10
-     "10                                                                            ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -524,8 +512,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 11 (Aiming at Man)
-     "11                                                                            ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -544,8 +532,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 12
-     "12                                                                            ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",
@@ -564,8 +552,8 @@ const char *aiming_gif[][19] = {
      "                                 |_.._| /_|_\\                                 ",
      "                                                                              ",
      "                                                                              "},
-    { // Frame 13
-     "13                                                                            ",
+    {
+     "                                                                              ",
      "                                                                              ",
      "                                        ///\"\\                                 ",
      "                                        |6 6|                                 ",

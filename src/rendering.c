@@ -273,22 +273,52 @@ void play_gif_frame() {
 
     switch (gif_state) {
         case 1:
-            //detroit_loading_gif: 5 frames total, 13 rows each, 78 chars wide)
+            // detroit_loading_gif: 6 frames total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)detroit_loading_gif, 13, 6, 4, 2, force_redraw);
             break;
 
         case 2:
-            // skyscraper_wide_gif: 13 rows, 4 frames. Drawn at row 4, col 27.
-            render_gif_delta((const char **)skyscraper_wide_gif, 13, 4, 4, 14, force_redraw);
+            // skyscraper_wide_gif: 4 frames total, 13 rows each, 54 chars wide
+            render_gif_delta((const char **)skyscraper_wide_gif, 13, 4, 4, 2, force_redraw);
             break;
 
         case 3:
-            // elevator_gif: 13 rows, 3 frames. Drawn at row 4, col 2.
+            // elevator_gif: 3 frames total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)elevator_gif, 13, 3, 4, 2, force_redraw);
             break;
 
+        case 4:
+            // animal_head: 1 frame total, 9 rows each, 18 chars wide
+            render_gif_delta((const char **)animal_head, 9, 1, 4, 2, force_redraw);
+            break;
+
+        case 5:
+            // library_hallway_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)library_hallway_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 6:
+            // kitchen_scene: 1 frame total, 14 rows each, 78 chars wide
+            render_gif_delta((const char **)kitchen_scene, 14, 1, 4, 2, force_redraw);
+            break;
+
+        case 7:
+            // sofa_and_table_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)sofa_and_table_scene, 13, 1, 4, 2, force_redraw);
+            break;
+            
+        case 8:
+            // desk_book_apple_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)desk_book_apple_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 9:
+            // bathroom_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)bathroom_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
         case 99:
-            // aiming_gif 14 frames total, 19 rows each, 78 chars wide
+            // aiming_gif: 14 frames total, 19 rows each, 78 chars wide
             render_gif_delta((const char **)aiming_gif, 19, 14, 4, 2, force_redraw);
             break;
         
