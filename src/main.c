@@ -101,62 +101,102 @@ int get_button_state()
     }
 }
 
-void update_scene() {
-    // Go to next scene based on selected option
-    /*
-        if (game.scene_index == SCENE_BALCONY_START_TEXT)
+void update_scene()
+{
+    int target_scene = story_scenes[game.scene_index].options[current_option].nextSceneId;
+
+    if (target_scene == SCENE_KITCHEN_FIRST_TEXT)
+    {
+        if (game.inventory[ITEM_JOHN_PHILLIPS_TABLET] == ITEM_JOHN_PHILLIPS_TABLET)
+        {
+            target_scene = SCENE_KITCHEN_EMPTY_TEXT;
+        }
+    }
+    
+    else if (target_scene == SCENE_LIVING_ROOM_FIRST_TEXT)
+    {
+        if (game.inventory[ITEM_GUN] == ITEM_GUN)
+        {
+            target_scene = SCENE_LIVING_ROOM_EMPTY_TEXT;
+        }
+    }
+    
+    else if (target_scene == SCENE_BEDROOM_FIRST_TEXT)
+    {
+        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
+        { 
+            target_scene = SCENE_BEDROOM_EMPTY_TEXT;
+        }
+    }
+
+
+    else if (target_scene == SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE)
+    {
+        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
+        {
+            target_scene = SCENE_KITCHEN_TABLET_LOCKED_MENU_HAS_CLUE;
+        }
+    }
+
+    else if (target_scene == SCENE_BALCONY_INTERMEDIARY_1)
     {
         int has_name = 0;
         int has_gun = 0;
 
-        if (game.clues_discovered[CLUE_DEVIANT_NAME] == CLUE_DEVIANT_NAME){
+        if (game.clues_discovered[CLUE_DEVIANT_NAME] == CLUE_DEVIANT_NAME)
+        {
             has_name = 1;
         }
-
-        if (game.inventory[ITEM_GUN] == ITEM_GUN){
+        if (game.inventory[ITEM_GUN] == ITEM_GUN)
+        {
             has_gun = 1;
         }
 
         if (has_name && has_gun)
         {
-            game.scene_index = SCENE_BALCONY_MENU_BOTH;
+            target_scene = SCENE_BALCONY_MENU_BOTH;
         }
         else if (has_name)
         {
-            game.scene_index = SCENE_BALCONY_MENU_NAME;
+            target_scene = SCENE_BALCONY_MENU_NAME;
         }
         else if (has_gun)
         {
-            game.scene_index = SCENE_BALCONY_MENU_GUN;
+            target_scene = SCENE_BALCONY_MENU_GUN;
         }
         else
         {
-            game.scene_index = SCENE_BALCONY_MENU_NONE;
+            target_scene = SCENE_BALCONY_MENU_NONE;
         }
     }
-        */
-    /*
-    // CHECKER 2: Vilken dialogmeny ska vi visa?
-    else if (game.scene_index == SCENE_BALCONY_DIALOGUE_1_TEXT)
+    else if (target_scene == SCENE_BALCONY_INTERMEDIARY_2)
     {
-        int knows_emma = 0; // (Eller om hon har ett ITEM_EMMAS_TABLET)
+        int knows_emma = 0;
 
-        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME){
+        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
+        {
             knows_emma = 1;
         }
 
         if (knows_emma)
         {
-            game.scene_index = SCENE_BALCONY_DIALOGUE_1_MENU_EMMA;
+            target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_EMMA;
         }
         else
         {
-            game.scene_index = SCENE_BALCONY_DIALOGUE_1_MENU_NONE;
+            target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_NONE;
         }
     }
-        */
+    else if (target_scene == SCENE_BALCONY_CONVINCE_SUCCESS_TEXT)
+    {
+        // Om spelaren inte har skrapat ihop minst 99% probability, misslyckas försöket!
+        if (success_rate < 99)
+        {
+            target_scene = SCENE_BALCONY_CONVINCE_FAIL_TEXT;
+        }
+    }
 
-    game.scene_index = story_scenes[game.scene_index].options[current_option].nextSceneId;
+    game.scene_index = target_scene;
     current_option = 0;
 
     Scene scene_struct = story_scenes[game.scene_index];
@@ -164,22 +204,27 @@ void update_scene() {
     clear_text();
     clear_display();
 
-    if (story_scenes[game.scene_index].option_count > 1){
+
+    if (scene_struct.option_count > 1)
+    {
         print_options(scene_struct);
     }
-    else{
+    else
+    {
         print_text(scene_struct.description);
     }
 
-    if (story_scenes[game.scene_index].itemId != 0){
-        game.inventory[story_scenes[game.scene_index].itemId] = story_scenes[game.scene_index].itemId;
-    };
 
-    if (story_scenes[game.scene_index].clueId != 0)
+    if (scene_struct.itemId != 0)
     {
-        game.inventory[story_scenes[game.scene_index].clueId] = story_scenes[game.scene_index].clueId;
-    };
+        game.inventory[scene_struct.itemId] = scene_struct.itemId;
+    }
 
+
+    if (scene_struct.clueId != 0 && scene_struct.clueId != -1)
+    {
+        game.clues_discovered[scene_struct.clueId] = scene_struct.clueId;
+    }
 
 
     place = (char *)get_location_name(scene_struct.location);
@@ -187,7 +232,6 @@ void update_scene() {
     success_rate += scene_struct.success_rate_modifier;
     gif_state = scene_struct.gif_state_number;
 }
-
 
 int main(void)
 {
@@ -299,9 +343,3 @@ int main(void)
 
     return 0;
 }
-
-/*
-girl: 3, 11
-guy: 4, 5, 9, 10
-
-*/
