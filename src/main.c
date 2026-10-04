@@ -315,6 +315,8 @@ int main(void)
     quicktime:
         clear_fullscreen();
         draw_static_ui();
+        gif_state = 0;
+        play_gif_frame();
         gif_state = 99;
         while (1){
             if (timeout_flag){
@@ -326,7 +328,7 @@ int main(void)
                 print("\n\a");
                 move_cursor(2, 1);
                 print((char*)ui_info2);
-                gif_frame--;
+                gif_frame += 0;
                 if (gif_frame == 3 || gif_frame == 11){
                     current_option = 0;
                 }
