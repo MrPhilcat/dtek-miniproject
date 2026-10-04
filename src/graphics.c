@@ -91,7 +91,7 @@ const char *detroit_loading_gif[][13] = {
      "                                                                              ",
      "                                                                              ",
      "      B     E     C     O     M     E         H     U     M     A     N       ",
-     "                                                                              ",
+     "                             (kind of...)                                     ",
      "                                                                              "}
 };
 
