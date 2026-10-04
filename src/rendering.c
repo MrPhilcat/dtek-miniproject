@@ -298,23 +298,58 @@ void play_gif_frame() {
             break;
 
         case 6:
-            // kitchen_scene: 1 frame total, 14 rows each, 78 chars wide
-            render_gif_delta((const char **)kitchen_scene, 14, 1, 4, 2, force_redraw);
+            // kitchen_scene_empty: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)kitchen_scene_empty, 13, 1, 4, 2, force_redraw);
             break;
 
         case 7:
-            // sofa_and_table_scene: 1 frame total, 13 rows each, 78 chars wide
-            render_gif_delta((const char **)sofa_and_table_scene, 13, 1, 4, 2, force_redraw);
+            // kitchen_scene (with tablet): 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)kitchen_scene, 13, 1, 4, 2, force_redraw);
             break;
             
         case 8:
-            // desk_book_apple_scene: 1 frame total, 13 rows each, 78 chars wide
-            render_gif_delta((const char **)desk_book_apple_scene, 13, 1, 4, 2, force_redraw);
+            // sofa_and_table_scene_empty: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)sofa_and_table_scene_empty, 13, 1, 4, 2, force_redraw);
             break;
 
         case 9:
+            // sofa_and_table_scene (with gun): 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)sofa_and_table_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 10:
+            // desk_book_apple_scene_empty: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)desk_book_apple_scene_empty, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 11:
+            // desk_book_apple_scene (with book): 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)desk_book_apple_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 12:
             // bathroom_scene: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)bathroom_scene, 13, 1, 4, 2, force_redraw);
+            break;
+        
+        case 13:
+            // balcony_standoff_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)balcony_standoff_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 14:
+            // balcony_empathetic_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)balcony_empathetic_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 15:
+            // balcony_aggressive_scene: 2 frames total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)balcony_aggressive_scene, 13, 2, 4, 2, force_redraw);
+            break;
+
+        case 16:
+            // balcony_hesitation_scene: 1 frame total, 13 rows each, 78 chars wide
+            render_gif_delta((const char **)balcony_hesitation_scene, 13, 1, 4, 2, force_redraw);
             break;
 
         case 99:

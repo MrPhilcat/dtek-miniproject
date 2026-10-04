@@ -12,7 +12,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_ELEVATOR_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2
+        .clueId = 0, .itemId = 0, .gif_state_number = 1 // DETROIT_LOADING_GIF
     },
     
     [SCENE_OUTSIDE_RETURN] = {
@@ -22,7 +22,8 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_ELEVATOR_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2},
+        .clueId = 0, .itemId = 0, .gif_state_number = 2 // SKYSCRAPER_WIDE_GIF
+    },
     
     [SCENE_ELEVATOR_MENU] = {
         .SceneId = SCENE_ELEVATOR_MENU, 
@@ -33,7 +34,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go outside", SCENE_OUTSIDE_RETURN, -1}
         }, 
         .success_rate_modifier = 0, 
-        .clueId = 0, .itemId = 0, .gif_state_number = 3
+        .clueId = 0, .itemId = 0, .gif_state_number = 3 // ELEVATOR_GIF
     },
 
     // ==========================================
@@ -46,7 +47,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_OFFICER_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2
+        .clueId = 0, .itemId = 0, .gif_state_number = 4 // ANIMAL_HEAD
     },
 
     [SCENE_OFFICER_RETURN] = {
@@ -56,7 +57,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_OFFICER_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2
+        .clueId = 0, .itemId = 0, .gif_state_number = 4 // ANIMAL_HEAD
     },
 
     [SCENE_OFFICER_MENU] = {
@@ -70,7 +71,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go down the elevator", SCENE_ELEVATOR_DOWN, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2
+        .clueId = 0, .itemId = 0, .gif_state_number = 4 // ANIMAL_HEAD
     },
 
     [SCENE_ELEVATOR_DOWN] = {
@@ -80,7 +81,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_ELEVATOR_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2
+        .clueId = 0, .itemId = 0, .gif_state_number = 3 // ELEVATOR_GIF
     },
 
     // ==========================================
@@ -93,7 +94,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_KITCHEN_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 6
+        .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
     },
 
     [SCENE_KITCHEN_MENU] = {
@@ -109,7 +110,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 6
+        .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
     },
 
     [SCENE_KITCHEN_TABLET] = {
@@ -119,7 +120,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_KITCHEN_EMPTY_MENU, -1}},
         .success_rate_modifier = 15,
-        .clueId = CLUE_DEVIANT_NAME, .itemId = ITEM_JOHN_PHILLIPS_TABLET, .gif_state_number = 6
+        .clueId = CLUE_DEVIANT_NAME, .itemId = ITEM_JOHN_PHILLIPS_TABLET, .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
     },
 
     [SCENE_KITCHEN_EMPTY_TEXT] = {
@@ -129,7 +130,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_KITCHEN_EMPTY_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
     },
 
     [SCENE_KITCHEN_EMPTY_MENU] = {
@@ -144,7 +145,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
     },
 
     // ==========================================
@@ -157,7 +158,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 6
+        .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
     },
 
     [SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE] = {
@@ -169,7 +170,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Put the tablet down", SCENE_KITCHEN_MENU, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 6
+        .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
     },
 
     [SCENE_KITCHEN_TABLET_LOCKED_MENU_HAS_CLUE] = {
@@ -182,7 +183,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Put the tablet down", SCENE_KITCHEN_MENU, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 6
+        .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
     },
 
     [SCENE_KITCHEN_TABLET_WRONG_PASSWORD_TEXT] = {
@@ -192,7 +193,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 6
+        .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
     },
 
     [SCENE_KITCHEN_TABLET_SUCCESS_TEXT] = {
@@ -202,7 +203,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_KITCHEN_EMPTY_MENU, -1}}, 
         .success_rate_modifier = 15,
-        .clueId = CLUE_DEVIANT_NAME, .itemId = ITEM_JOHN_PHILLIPS_TABLET, .gif_state_number = 6
+        .clueId = CLUE_DEVIANT_NAME, .itemId = ITEM_JOHN_PHILLIPS_TABLET, .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
     },
 
     // ==========================================
@@ -215,7 +216,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_LIVING_ROOM_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 9 // SOFA_AND_TABLE_SCENE (WITH GUN)
     },
 
     [SCENE_LIVING_ROOM_MENU] = {
@@ -231,7 +232,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 9 // SOFA_AND_TABLE_SCENE (WITH GUN)
     },
 
     [SCENE_LIVING_ROOM_GUN] = {
@@ -242,7 +243,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .options = {{"", SCENE_LIVING_ROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 10,
         .clueId = -1, .itemId = ITEM_GUN,
-        .gif_state_number = 2
+        .gif_state_number = 8 // SOFA_AND_TABLE_SCENE_EMPTY
     },
 
     [SCENE_LIVING_ROOM_EMPTY_TEXT] = {
@@ -252,7 +253,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_LIVING_ROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 8 // SOFA_AND_TABLE_SCENE_EMPTY
     },
 
     [SCENE_LIVING_ROOM_EMPTY_MENU] = {
@@ -267,7 +268,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 8 // SOFA_AND_TABLE_SCENE_EMPTY
     },
 
     // ==========================================
@@ -280,7 +281,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BEDROOM_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 11 // DESK_BOOK_APPLE_SCENE (WITH BOOK)
     },
 
     [SCENE_BEDROOM_MENU] = {
@@ -296,7 +297,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 11 // DESK_BOOK_APPLE_SCENE (WITH BOOK)
     },
 
     [SCENE_BEDROOM_TABLET] = {
@@ -306,7 +307,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BEDROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 15,
-        .clueId = CLUE_CHILD_NAME, .itemId = ITEM_EMMAS_TABLET, .gif_state_number = 2
+        .clueId = CLUE_CHILD_NAME, .itemId = ITEM_EMMAS_TABLET, .gif_state_number = 10 // DESK_BOOK_APPLE_SCENE_EMPTY
     },
 
     [SCENE_BEDROOM_EMPTY_TEXT] = {
@@ -316,7 +317,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BEDROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 10 // DESK_BOOK_APPLE_SCENE_EMPTY
     },
 
     [SCENE_BEDROOM_EMPTY_MENU] = {
@@ -331,7 +332,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 10 // DESK_BOOK_APPLE_SCENE_EMPTY
     },
 
     // ==========================================
@@ -344,7 +345,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BATHROOM_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 12 // BATHROOM_SCENE
     },
 
     [SCENE_BATHROOM_MENU] = {
@@ -360,7 +361,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 12 // BATHROOM_SCENE
     },
 
     [SCENE_BATHROOM_SEARCH] = {
@@ -370,7 +371,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BATHROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 0, 
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 12 // BATHROOM_SCENE
     },
 
     [SCENE_BATHROOM_EMPTY_TEXT] = {
@@ -380,7 +381,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BATHROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 12 // BATHROOM_SCENE
     },
 
     [SCENE_BATHROOM_EMPTY_MENU] = {
@@ -395,7 +396,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 12 // BATHROOM_SCENE
     },
 
     // ==========================================
@@ -408,7 +409,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1, 
         .options = {{"", SCENE_BALCONY_START_TEXT, -1}}, // Fallback om update_scene() missar
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     [SCENE_BALCONY_START_TEXT] = {
@@ -418,7 +419,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_INTERMEDIARY_1, -1}}, // Går till checkern som dirigerar till rätt meny
         .success_rate_modifier = 0,
-        .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     // ==========================================
@@ -430,7 +431,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'DROP YOUR GUN!' Shoot the deviant when the cursor is on him.",
         .option_count = 1, // En vanlig textscen som väntar på knapptryck
         .options = {{"", SCENE_BALCONY_GUN_TESTER_TWO, -1}}, // Går direkt till QTE
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 99 // AIMING_GIF
     },
 
     [SCENE_BALCONY_GUN_TESTER_TWO] = {
@@ -443,7 +444,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"", SCENE_BALCONY_DRAW_GUN_FAIL_TEXT, -1},    // Index 1: Miss!
             {"", SCENE_BALCONY_DRAW_GUN_FAIL_TEXT, -1}     // Index 2: Miss!
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 99 // Din QTE-gif
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 99 // AIMING_GIF
     },
 
     // ==========================================
@@ -457,7 +458,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Approach slowly and reassure him", SCENE_BALCONY_DIALOGUE_1_TEXT, -1}, 
             {"Order him to surrender", SCENE_BALCONY_ORDER_SURRENDER_TEXT, -1} 
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     [SCENE_BALCONY_MENU_NAME] = {
@@ -468,7 +469,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Approach slowly and reassure him", SCENE_BALCONY_DIALOGUE_1_TEXT, -1}, 
             {"Call him by his name (Daniel)", SCENE_BALCONY_CALL_NAME_TEXT, -1}
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     [SCENE_BALCONY_MENU_GUN] = {
@@ -479,7 +480,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Approach slowly and reassure him", SCENE_BALCONY_DIALOGUE_1_TEXT, -1}, 
             {"Draw hidden gun", SCENE_BALCONY_GUN_TESTER, -1} // Går till din gun tester!
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     [SCENE_BALCONY_MENU_BOTH] = {
@@ -491,7 +492,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Call him by his name (Daniel)", SCENE_BALCONY_CALL_NAME_TEXT, -1},
             {"Draw hidden gun", SCENE_BALCONY_GUN_TESTER, -1} // Går till din gun tester!
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     // ==========================================
@@ -503,7 +504,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "You keep your hands visible and take a slow, calculated step forward. 'Stay back! Don't take another step!' he screams... You have his attention, but the situation remains incredibly fragile.",
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_INTERMEDIARY_2, -1}}, 
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     [SCENE_BALCONY_CALL_NAME_TEXT] = {
@@ -512,7 +513,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'Daniel!' you shout over the roar of the helicopter. He flinches, his LED flashing yellow. 'How do you know my name?!' he demands, but his grip on the girl loosens slightly.",
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_INTERMEDIARY_2, -1}}, 
-        .success_rate_modifier = 5, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 5, .clueId = -1, .itemId = 0, .gif_state_number = 14 // BALCONY_EMPATHETIC_SCENE
     },
 
     [SCENE_BALCONY_ORDER_SURRENDER_TEXT] = {
@@ -521,7 +522,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "You step forward aggressively. 'Let the hostage go immediately!' you demand. His LED spins a violent red. 'No! You're just going to destroy me!'",
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_CONVINCE_FAIL_TEXT, -1}}, 
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 15 // BALCONY_AGGRESSIVE_SCENE
     },
 
     [SCENE_BALCONY_INTERMEDIARY_2] = {
@@ -530,7 +531,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "", 
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_DIALOGUE_1_MENU_NONE, -1}}, // Checkern pekar om denna
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
     },
 
     // ==========================================
@@ -542,7 +543,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "You reach into your jacket, drawing the police handgun with mechanical precision. Without hesitation, you pull the trigger. The bullet hits the rogue android squarely in the head. His grip loosens, and he collapses lifelessly.",
         .option_count = 1,
         .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}}, 
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     },
 
     [SCENE_BALCONY_DRAW_GUN_FAIL_TEXT] = {
@@ -551,7 +552,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "A momentary glitch in your optical sensors causes your aim to falter. As you fire, your shot shatters the glass barrier. 'You lied to me!' he screams. He returns fire, striking your biocomponents, before pulling the screaming girl over the edge with him.",
         .option_count = 1,
         .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}}, 
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     },
 
     // ==========================================
@@ -565,7 +566,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Sympathize with him", SCENE_BALCONY_SYMPATHIZE_TEXT, -1}, 
             {"Demand he lets her go", SCENE_BALCONY_DEMAND_LET_GO_TEXT, -1} 
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 16 // BALCONY_HESITATION_SCENE
     },
 
     [SCENE_BALCONY_DIALOGUE_1_MENU_EMMA] = {
@@ -576,7 +577,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Sympathize with him", SCENE_BALCONY_SYMPATHIZE_TEXT, -1}, 
             {"Mention Emma", SCENE_BALCONY_MENTION_EMMA_TEXT, -1} 
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 16 // BALCONY_HESITATION_SCENE
     },
 
     // ==========================================
@@ -588,7 +589,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "You lower your voice, speaking with a calm, synthesized empathy. 'I know you're scared. You realized they were going to replace you, and you didn't want to die.' The deviant hesitates, his LED shifting to a rapid yellow. 'They don't understand us!'",
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_DIALOGUE_2_MENU, -1}},
-        .success_rate_modifier = 5, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 5, .clueId = -1, .itemId = 0, .gif_state_number = 14 // BALCONY_EMPATHETIC_SCENE
     },
 
     [SCENE_BALCONY_MENTION_EMMA_TEXT] = {
@@ -597,7 +598,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'Think about Emma, Daniel. She loves you. You are a part of her family.' The deviant hesitates, looking down at the crying girl. 'I... I didn't want to hurt her...' he stammers, his mechanical voice breaking.",
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_DIALOGUE_2_MENU, -1}},
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 14 // BALCONY_EMPATHETIC_SCENE
     },
 
     [SCENE_BALCONY_DEMAND_LET_GO_TEXT] = {
@@ -606,7 +607,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'Drop the gun now!' you order mechanically. He tightens his grip on the girl in panic, his LED spinning a violent red. 'Stay back! You don't care about me at all!'",
         .option_count = 1,
         .options = {{"", SCENE_BALCONY_CONVINCE_FAIL_TEXT, -1}},
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 15 // BALCONY_AGGRESSIVE_SCENE
     },
 
     // ==========================================
@@ -621,7 +622,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Convince him to trust you", SCENE_BALCONY_CONVINCE_SUCCESS_TEXT, -1}, 
             {"Sacrifice yourself to save Emma", SCENE_BALCONY_SACRIFICE_TEXT, -1}
         },
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 16 // BALCONY_HESITATION_SCENE
     },
 
     [SCENE_BALCONY_CONVINCE_SUCCESS_TEXT] = {
@@ -630,7 +631,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'Let her go, Daniel. I promise you, if you surrender now, no one will hurt you.' Because you took the time to uncover his past, your words break through. He slowly lowers the handgun and releases his grip. Emma immediately scrambles away from the edge.",
         .option_count = 1,
         .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}},
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     },
 
     [SCENE_BALCONY_CONVINCE_FAIL_TEXT] = {
@@ -639,7 +640,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "You tell him to trust you, but because you failed to build a real emotional connection, your words sound empty. 'You're lying!' he screams. Before you can make another move, he leans backward into the abyss. Both the rogue android and the little girl plummet.",
         .option_count = 1,
         .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}},
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     },
 
     [SCENE_BALCONY_SACRIFICE_TEXT] = {
@@ -648,6 +649,6 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "Without a second of hesitation, you sprint directly at the deviant. You violently shove Emma out of his grasp to safety. In the exact same motion, your momentum carries you into Daniel. He fires a point-blank shot into your chest just as the two of you plummet off the skyscraper.",
         .option_count = 1,
         .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}},
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     }
 };
