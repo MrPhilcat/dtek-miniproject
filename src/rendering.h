@@ -45,6 +45,8 @@ void render_time();
 // OBS! Doesn't automatically clear old text in the window; make sure to use clear_text() first.
 void print_text(const char *text);
 
+void move_cursor(unsigned int row, unsigned int col);
+
 void print_options(Scene scene);
 
 // Draws a static, single-frame ASCII image at the specified coordinates.

@@ -9,7 +9,7 @@ void hide_cursor(){
 }
 
 // Helper function to move cursor to designated row and column
-static void move_cursor(unsigned int row, unsigned int col) {
+void move_cursor(unsigned int row, unsigned int col) {
     print("\x1b[");    // 1. Start the ANSI escape sequence
     print_dec(row);    // 2. Insert the Y coordinate
     printc(';');       // 3. Separator
@@ -31,9 +31,7 @@ void clear_display() {
     // Display region sits between rows 4 and 16, columns 2 to 79 (78 characters wide)
     for (int i = 4; i <= 16; i++) {
         move_cursor(i, 2);
-        for (int j = 0; j < 78; j++) {
-            printc(' ');
-        }
+        print((char*)empty_row78);
     }
 }
 
@@ -42,9 +40,7 @@ void clear_text() {
     // Text region sits between rows 18 and 23, columns 2 to 79 (78 characters wide)
     for (int i = 18; i <= 23; i++) {
         move_cursor(i, 2);
-        for (int j = 0; j < 78; j++) {
-            printc(' ');
-        }
+        print((char*)empty_row78);
     }
 }
 
@@ -277,8 +273,8 @@ void play_gif_frame() {
 
     switch (gif_state) {
         case 1:
-            // test_gif: 12 rows, 5 frames. Drawn at row 4, col 27.
-            render_gif_delta((const char **)test_gif, 12, 5, 4, 27, force_redraw);
+            //detroit_loading_gif: 5 frames total, 13 rows each, 78 chars wide)
+            render_gif_delta((const char **)detroit_loading_gif, 13, 6, 4, 2, force_redraw);
             break;
 
         case 2:
@@ -291,6 +287,11 @@ void play_gif_frame() {
             render_gif_delta((const char **)elevator_gif, 13, 3, 4, 2, force_redraw);
             break;
 
+        case 99:
+            // aiming_gif 14 frames total, 19 rows each, 78 chars wide
+            render_gif_delta((const char **)aiming_gif, 19, 14, 4, 2, force_redraw);
+            break;
+        
         default:
             break;
     }

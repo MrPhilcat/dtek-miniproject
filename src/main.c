@@ -17,7 +17,7 @@ volatile int current_option = 0;
 
 //Local Variables
 char timeoutcount = 0;
-volatile char render_gif_flag = 0;
+volatile char timeout_flag = 0;
 
 
 // Define addrsses for timer values
@@ -51,35 +51,22 @@ void handle_interrupt(unsigned cause){
     // Reset the interrupt
     TIMER_STATUS = 0;
 
-    // Allow playing next gif frame (if any)
-    render_gif_flag = 1;
-    
-    // Timer Logic
-    timeoutcount++;
-    if(timeoutcount >= 3){
-        timeoutcount = 0; 
-        time++;
-        render_time();
-        if (!(time % 10)){
-            success_rate--;
-            render_success_rate();
-        }
-    }
+    // Indicate timeout
+    timeout_flag = 1;
 }
 
 void startup(){
-    clear_fullscreen();
-    hide_cursor();
-    draw_static_ui();
+    clear_display();
+    clear_text();
     render_success_rate();
     render_place();
-    timer_interupt_initialize();
 
     game.scene_index = 0;
     place = (char *)get_location_name(game.location);
     render_place();
     game.inventory_count = 0;
     game.success_rate = 50;
+    game.time = 0;
     print_text(story_scenes[game.scene_index].description);
     gif_state = story_scenes[game.scene_index].gif_state_number;
 }
@@ -116,7 +103,9 @@ int get_button_state()
 
 void update_scene() {
     // Go to next scene based on selected option
-    if (game.scene_index == SCENE_BALCONY_INTERMEDIARY_1) {
+    /*
+        if (game.scene_index == SCENE_BALCONY_START_TEXT)
+    {
         int has_name = 0;
         int has_gun = 0;
 
@@ -145,9 +134,10 @@ void update_scene() {
             game.scene_index = SCENE_BALCONY_MENU_NONE;
         }
     }
-
+        */
+    /*
     // CHECKER 2: Vilken dialogmeny ska vi visa?
-    else if (game.scene_index == SCENE_BALCONY_INTERMEDIARY_2)
+    else if (game.scene_index == SCENE_BALCONY_DIALOGUE_1_TEXT)
     {
         int knows_emma = 0; // (Eller om hon har ett ITEM_EMMAS_TABLET)
 
@@ -164,6 +154,7 @@ void update_scene() {
             game.scene_index = SCENE_BALCONY_DIALOGUE_1_MENU_NONE;
         }
     }
+        */
 
     game.scene_index = story_scenes[game.scene_index].options[current_option].nextSceneId;
     current_option = 0;
@@ -200,12 +191,50 @@ void update_scene() {
 
 int main(void)
 {
+    int switch_state;
+    int button_state;
+    
+    timer_interupt_initialize();
+    clear_fullscreen();
+    hide_cursor();
+    draw_static_ui();
+
+    int title_status = 0;
+    int startwait = 0;
+    gif_state = 1;
+    play_gif_frame();
+    while (title_status < 5)
+    {
+        if (timeout_flag){
+            timeout_flag = 0;
+            startwait++;
+            if (startwait == 3)
+            {
+                print("\n\a");
+                startwait = 0;
+                play_gif_frame();
+                title_status++;
+            }
+        }
+    }
+    print_text("Use button to toggle options and switch 1 to select.\n\n\n >[Start]");
+    while (!switch_state)
+    {
+        switch_state = get_switch_state();
+    }
+    move_cursor(2, 1);
+    print((char*)ui_info2);
+    
+    
+    
+    
     // Main program loop will go here
     startup();
     
     while(1) {
-        int switch_state = get_switch_state();
-        int button_state = get_button_state();
+        comeback:
+        switch_state = get_switch_state();
+        button_state = get_button_state();
 
         if (button_state) {
             if(story_scenes[game.scene_index].option_count > 1){
@@ -219,13 +248,60 @@ int main(void)
         }
 
         // Check if an interrupt signaled a new frame
-        if (render_gif_flag){
-            render_gif_flag = 0; // Clear the flag
+        if (timeout_flag){
+            timeout_flag = 0; // Clear the flag
             play_gif_frame();
+
+            // Update timer
+            timeoutcount++;
+            if(timeoutcount >= 3){
+                timeoutcount = 0; 
+                time++;
+                render_time();
+                if (!(time % 10)){
+                    success_rate--;
+                    render_success_rate();
+                }
+            }
+            if(game.scene_index == SCENE_BALCONY_GUN_TESTER_TWO){
+                goto quicktime;
+            }
+        }
+    }
+    quicktime:
+        clear_fullscreen();
+        draw_static_ui();
+        gif_state = 99;
+        while (1){
+            if (timeout_flag){
+                timeout_flag = 0; // Clear the flag
+                play_gif_frame();
+            }
+            button_state = get_button_state();
+            if(button_state){
+                print("\n\a");
+                move_cursor(2, 1);
+                print((char*)ui_info2);
+                gif_frame--;
+                if (gif_frame == 3 || gif_frame == 11){
+                    current_option = 0;
+                }
+                else if (gif_frame == 4 || gif_frame == 5 || gif_frame == 9 || gif_frame == 10){
+                    current_option = 1;
+                }
+                else{
+                    current_option = 2;
+                }
+                update_scene();
+                goto comeback;
+            }
         }
 
-        // Other non-blocking game logic goes here
-        
-    }
     return 0;
 }
+
+/*
+girl: 3, 11
+guy: 4, 5, 9, 10
+
+*/

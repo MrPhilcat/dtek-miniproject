@@ -22,8 +22,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_ELEVATOR_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 2
-    },
+        .clueId = 0, .itemId = 0, .gif_state_number = 2},
     
     [SCENE_ELEVATOR_MENU] = {
         .SceneId = SCENE_ELEVATOR_MENU, 
@@ -107,7 +106,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the living room", SCENE_LIVING_ROOM_FIRST_TEXT, SCENE_LIVING_ROOM_EMPTY_TEXT},
             {"Go to the bedroom", SCENE_BEDROOM_FIRST_TEXT, SCENE_BEDROOM_EMPTY_TEXT},
             {"Go to the bathroom", SCENE_BATHROOM_FIRST_TEXT, SCENE_BATHROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -142,7 +141,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the living room", SCENE_LIVING_ROOM_FIRST_TEXT, SCENE_LIVING_ROOM_EMPTY_TEXT},
             {"Go to the bedroom", SCENE_BEDROOM_FIRST_TEXT, SCENE_BEDROOM_EMPTY_TEXT},
             {"Go to the bathroom", SCENE_BATHROOM_FIRST_TEXT, SCENE_BATHROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -171,7 +170,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the kitchen", SCENE_KITCHEN_FIRST_TEXT, SCENE_KITCHEN_EMPTY_TEXT},
             {"Go to the bedroom", SCENE_BEDROOM_FIRST_TEXT, SCENE_BEDROOM_EMPTY_TEXT},
             {"Go to the bathroom", SCENE_BATHROOM_FIRST_TEXT, SCENE_BATHROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -207,7 +206,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the kitchen", SCENE_KITCHEN_FIRST_TEXT, SCENE_KITCHEN_EMPTY_TEXT},
             {"Go to the bedroom", SCENE_BEDROOM_FIRST_TEXT, SCENE_BEDROOM_EMPTY_TEXT},
             {"Go to the bathroom", SCENE_BATHROOM_FIRST_TEXT, SCENE_BATHROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -236,7 +235,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the kitchen", SCENE_KITCHEN_FIRST_TEXT, SCENE_KITCHEN_EMPTY_TEXT},
             {"Go to the living room", SCENE_LIVING_ROOM_FIRST_TEXT, SCENE_LIVING_ROOM_EMPTY_TEXT},
             {"Go to the bathroom", SCENE_BATHROOM_FIRST_TEXT, SCENE_BATHROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -271,7 +270,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the kitchen", SCENE_KITCHEN_FIRST_TEXT, SCENE_KITCHEN_EMPTY_TEXT},
             {"Go to the living room", SCENE_LIVING_ROOM_FIRST_TEXT, SCENE_LIVING_ROOM_EMPTY_TEXT},
             {"Go to the bathroom", SCENE_BATHROOM_FIRST_TEXT, SCENE_BATHROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -300,7 +299,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the kitchen", SCENE_KITCHEN_FIRST_TEXT, SCENE_KITCHEN_EMPTY_TEXT},
             {"Go to the living room", SCENE_LIVING_ROOM_FIRST_TEXT, SCENE_LIVING_ROOM_EMPTY_TEXT},
             {"Go to the bedroom", SCENE_BEDROOM_FIRST_TEXT, SCENE_BEDROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -335,7 +334,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go to the kitchen", SCENE_KITCHEN_FIRST_TEXT, SCENE_KITCHEN_EMPTY_TEXT},
             {"Go to the living room", SCENE_LIVING_ROOM_FIRST_TEXT, SCENE_LIVING_ROOM_EMPTY_TEXT},
             {"Go to the bedroom", SCENE_BEDROOM_FIRST_TEXT, SCENE_BEDROOM_EMPTY_TEXT},
-            {"Go out on the balcony", SCENE_BALCONY_INTERMEDIARY_1, -1}
+            {"Go out on the balcony", SCENE_BALCONY_START_TEXT, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
@@ -358,11 +357,26 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .SceneId = SCENE_BALCONY_START_TEXT,
         .location = LOCATION_BALCONY,
         .description = "You step out through the sliding glass doors onto the wind-swept balcony. The deafening roar of a police helicopter fills the night air... Every choice you make now will determine if they both live or die.",
-        .option_count = 1,
-        .options = {{"", SCENE_BALCONY_MENU_NONE, -1}},
+        .option_count = 2,
+        .options = {{"", SCENE_BALCONY_GUN_TESTER, -1}, {"", SCENE_KITCHEN_MENU, -1}},
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 2
     },
+
+    
+    [SCENE_BALCONY_GUN_TESTER] = {
+        .SceneId = SCENE_BALCONY_GUN_TESTER,
+        .location = LOCATION_BALCONY,
+        .description = "'DROP YOUR GUN', shoot the guy when the cursor is on him",
+        .option_count = 2,
+        .options = {{"", SCENE_BALCONY_GUN_TESTER_TWO, -1}}
+    },
+
+    [SCENE_BALCONY_GUN_TESTER_TWO] = {
+        .SceneId = SCENE_BALCONY_GUN_TESTER_TWO,
+
+    },
+    
 
     [SCENE_BALCONY_MENU_NONE] = {
         .SceneId = SCENE_BALCONY_MENU_NONE,
@@ -434,7 +448,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_BALCONY,
         .description = "You keep your hands visible and take a slow, calculated step forward. 'Stay back! Don't take another step!' he screams... You have his attention, but the situation remains incredibly fragile.",
         .option_count = 1,
-        .options = {{"", SCENE_BALCONY_INTERMEDIARY_2, -1}},
+        .options = {{"", SCENE_BALCONY_DIALOGUE_1_TEXT, -1}},
         .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 2
     },
 
