@@ -225,6 +225,11 @@ void draw_image(const char **image, int num_rows, int start_row, int start_col) 
 
 // Helper function to draw the next animation frame by only updating rows that changed (delta rendering)
 static void render_gif_delta(const char **gif_data, int rows, int total_frames, int start_row, int start_col, int force_redraw) {
+    // If there's only 1 frame and we aren't forced to redraw, nothing could have changed.
+    if (total_frames <= 1 && !force_redraw) {
+        return;
+    }
+    
     // Find the previous frame index (wraps around to the last frame)
     int prev_frame;
     if (gif_frame == 0) {
