@@ -25,7 +25,14 @@ extern const char *balcony_empathetic_scene[][13];
 extern const char *balcony_aggressive_scene[][13];
 extern const char *balcony_hesitation_scene[][13];
 extern const char *aiming_gif[][19];
-extern const char *game_over_gif[][13];
+extern const char *success_survived_gif[][19];
+extern const char *game_over_sacrifice_gif[][19];
+extern const char *game_over_fail_gif[][19];
 extern const char *custom_art_frame[][13];
+extern const char *game_over_survived_alone_gif[][19];
+extern const char *balcony_empty_scene[][13];
+extern const char *balcony_daniel_alone_scene[][13];
+extern const char *balcony_daniel_dead_scene[][13];
+extern const char *balcony_emma_alone_scene[][13];
 
 #endif

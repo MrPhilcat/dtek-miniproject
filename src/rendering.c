@@ -353,11 +353,39 @@ void play_gif_frame() {
             break;
 
         case 17:
-            render_gif_delta((const char **)game_over_gif, 13, 6, 4, 2, force_redraw);
+            render_gif_delta((const char **)success_survived_gif, 19, 3, 4, 2, force_redraw);
             break;
 
         case 18:
-            render_gif_delta((const char **)custom_art_frame, 13, 6, 4, 2, force_redraw);
+            render_gif_delta((const char **)custom_art_frame, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 19:
+            render_gif_delta((const char **)game_over_sacrifice_gif, 19, 3, 4, 2, force_redraw);
+            break;
+
+        case 20:
+            render_gif_delta((const char **)game_over_fail_gif, 19, 3, 4, 2, force_redraw);
+            break;
+
+        case 21:
+            render_gif_delta((const char **)game_over_survived_alone_gif, 19, 3, 4, 2, force_redraw);
+            break;
+
+        case 22:
+            render_gif_delta((const char **)balcony_empty_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 23:
+            render_gif_delta((const char **)balcony_daniel_alone_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 24:
+            render_gif_delta((const char **)balcony_daniel_dead_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 25:
+            render_gif_delta((const char **)balcony_emma_alone_scene, 13, 1, 4, 2, force_redraw);
             break;
 
         case 99:

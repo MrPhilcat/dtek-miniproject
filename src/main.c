@@ -347,7 +347,8 @@ int main(void)
             if(game.scene_index == SCENE_BALCONY_GUN_TESTER_TWO){
                 goto quicktime;
             }
-            if(game.scene_index == SCENE_ENDING){
+            if (game.scene_index == SCENE_ENDING_SUCCESS || game.scene_index == SCENE_ENDING_EMMA_DIE || game.scene_index == SCENE_ENDING_YOU_DIE || game.scene_index == SCENE_ENDING_YOU_DIE_EMMA_DIE)
+            {
                 goto ending;
             }
 
@@ -380,10 +381,14 @@ int main(void)
             }
             button_state = get_button_state();
             if(button_state){
-                print("\a\n");
-                move_cursor(2, 1);
+                // 1. Ta bort \n! \a spelar ljudet, radbrytningen förstör grafiken.
+                print("\a"); 
+                
+                // 2. Rensa hela terminalen så att eventuella gamla upp-scrollade 
+                // rester försvinner innan vi ritar nya ramar.
+                clear_fullscreen();
                 draw_static_ui();
-                print((char*)ui_info2);
+                
                 gif_frame--;
                 if (gif_frame == 4 || gif_frame == 5 || gif_frame == 9 || gif_frame == 10){
                     current_option = 0;
@@ -394,7 +399,16 @@ int main(void)
                 else{
                     current_option = 2;
                 }
+                
+                // 3. Denna funktion försöker automatiskt skriva ut 
+                // platsen (Balcony) på rad 2.
                 update_scene();
+                
+                // 4. Eftersom vi BARA vill ha stjärnorna skriver vi 
+                // över rad 2 med ui_info (stjärnorna) direkt efter.
+                move_cursor(2, 1);
+                print((char*)ui_info);
+                
                 goto comeback;
             }
         }
@@ -402,9 +416,21 @@ int main(void)
     ending:
         clear_fullscreen();
         draw_static_ui();
-        gif_state = 17;
+        if (game.scene_index == SCENE_ENDING_SUCCESS){
+            gif_state = 17;
+        }
+        else if (game.scene_index == SCENE_ENDING_YOU_DIE){
+            gif_state = 19;
+        }
+        else if (game.scene_index == SCENE_ENDING_YOU_DIE_EMMA_DIE){
+            gif_state = 20;
+        }
+        else if (game.scene_index == SCENE_ENDING_EMMA_DIE)
+        {
+            gif_state = 21;
+        }
         play_gif_frame();
-        while (title_status < 3)
+        while (title_status < 2)
         {
             if (timeout_flag){
                 timeout_flag = 0;
@@ -418,9 +444,17 @@ int main(void)
                 }
             }
         }
-        move_cursor(11, 22);
-        print("Tester test test");
-
-    return 0;
+    while(!get_button_state()) {
+            // Väntar i en oändlig loop tills knappen trycks ner
+        }
+        
+        // 2. Rensa hela terminalen så den blir svart och tom
+        clear_fullscreen();
+        
+        // 3. Återställ terminalens markör (motsatsen till hide_cursor)
+        print("\x1b[?25h");
+        
+        // 4. Stäng programmet och ge tillbaka kommandotolken till användaren
+        return 0;
     
 }
