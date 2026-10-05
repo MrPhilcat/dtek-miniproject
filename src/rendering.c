@@ -279,7 +279,7 @@ void play_gif_frame() {
 
         case 2:
             // skyscraper_wide_gif: 4 frames total, 13 rows each, 54 chars wide
-            render_gif_delta((const char **)skyscraper_wide_gif, 13, 4, 4, 2, force_redraw);
+            render_gif_delta((const char **)skyscraper_wide_gif, 13, 4, 4, 14, force_redraw);
             break;
 
         case 3:
@@ -289,7 +289,7 @@ void play_gif_frame() {
 
         case 4:
             // animal_head: 1 frame total, 9 rows each, 18 chars wide
-            render_gif_delta((const char **)animal_head, 9, 1, 4, 2, force_redraw);
+            render_gif_delta((const char **)animal_head, 9, 1, 6, 30, force_redraw);
             break;
 
         case 5:
@@ -350,6 +350,14 @@ void play_gif_frame() {
         case 16:
             // balcony_hesitation_scene: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)balcony_hesitation_scene, 13, 1, 4, 2, force_redraw);
+            break;
+
+        case 17:
+            render_gif_delta((const char **)game_over_gif, 13, 6, 4, 2, force_redraw);
+            break;
+
+        case 18:
+            render_gif_delta((const char **)custom_art_frame, 13, 6, 4, 2, force_redraw);
             break;
 
         case 99:

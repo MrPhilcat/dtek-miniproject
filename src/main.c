@@ -71,34 +71,81 @@ void startup(){
     gif_state = story_scenes[game.scene_index].gif_state_number;
 }
 
-int get_switch_state(){
+
+#define DEBOUNCE_COOLDOWN 10000 
+
+int get_switch_state() {
     static unsigned int last_switch_state = 0;
+    static int initialized = 0;
+    static unsigned int cooldown = 0;
+
     unsigned int current_switch_state = SWITCHES & 0x1;
 
-    if (current_switch_state && !last_switch_state) {
+    // On the very first run, record the physical state of the switch 
+    // so it doesn't trigger a fake transition.
+    if (!initialized) {
         last_switch_state = current_switch_state;
-        return 1;
-    } else {
-        last_switch_state = current_switch_state;
+        initialized = 1;
         return 0;
     }
+
+    // FIX 2: The Double Input Bug
+    // If the cooldown timer is active, the switch recently changed state. 
+    // Decrement the timer and ignore all physical bouncing.
+    if (cooldown > 0) {
+        cooldown--;
+        return 0;
+    }
+
+    // Normal Edge Detection
+    if (current_switch_state != last_switch_state) {
+        last_switch_state = current_switch_state;
+        cooldown = DEBOUNCE_COOLDOWN; // Start the debounce timer
+        
+        if (current_switch_state == 1) {
+            return 1; // Trigger on the rising edge
+        }
+    }
+    
+    return 0;
 }
+
 
 int get_button_state()
 {
     static unsigned int last_button_state = 0;
+    static int initialized = 0;
+    static unsigned int cooldown = 0;
+
     unsigned int current_button_state = BUTTON & 0x1;
 
-    if (current_button_state && !last_button_state)
+    // FIX 1: Prevent startup trigger if button is held down
+    if (!initialized)
     {
         last_button_state = current_button_state;
-        return 1;
-    }
-    else
-    {
-        last_button_state = current_button_state;
+        initialized = 1;
         return 0;
     }
+
+    // FIX 2: Ignore inputs while button is mechanically bouncing
+    if (cooldown > 0)
+    {
+        cooldown--;
+        return 0;
+    }
+
+    if (current_button_state != last_button_state)
+    {
+        last_button_state = current_button_state;
+        cooldown = DEBOUNCE_COOLDOWN; // Start the debounce timer
+        
+        if (current_button_state == 1)
+        {
+            return 1;
+        }
+    }
+    
+    return 0;
 }
 
 void update_scene()
@@ -202,9 +249,13 @@ void update_scene()
     Scene scene_struct = story_scenes[game.scene_index];
 
     clear_text();
-    clear_display();
-
-
+    // Only wipe the screen and redraw if the image is ACTUALLY changing
+    if (gif_state != scene_struct.gif_state_number){
+        clear_display();
+        gif_state = scene_struct.gif_state_number; 
+        play_gif_frame(); // Draw the new image IMMEDIATELY, don't wait for the timer!
+    }
+    
     if (scene_struct.option_count > 1)
     {
         print_options(scene_struct);
@@ -230,7 +281,6 @@ void update_scene()
     place = (char *)get_location_name(scene_struct.location);
     render_place();
     success_rate += scene_struct.success_rate_modifier;
-    gif_state = scene_struct.gif_state_number;
 }
 
 int main(void)
@@ -261,6 +311,7 @@ int main(void)
             }
         }
     }
+    title_status = 0;
     print_text("Use button to toggle options and switch 1 to select.\n\n\n >[Start]");
     while (!switch_state)
     {
@@ -293,6 +344,13 @@ int main(void)
 
         // Check if an interrupt signaled a new frame
         if (timeout_flag){
+            if(game.scene_index == SCENE_BALCONY_GUN_TESTER_TWO){
+                goto quicktime;
+            }
+            if(game.scene_index == SCENE_ENDING){
+                goto ending;
+            }
+
             timeout_flag = 0; // Clear the flag
             play_gif_frame();
 
@@ -306,9 +364,6 @@ int main(void)
                     success_rate--;
                     render_success_rate();
                 }
-            }
-            if(game.scene_index == SCENE_BALCONY_GUN_TESTER_TWO){
-                goto quicktime;
             }
         }
     }
@@ -325,14 +380,15 @@ int main(void)
             }
             button_state = get_button_state();
             if(button_state){
-                print("\n\a");
+                print("\a\n");
                 move_cursor(2, 1);
+                draw_static_ui();
                 print((char*)ui_info2);
-                gif_frame += 0;
-                if (gif_frame == 3 || gif_frame == 11){
+                gif_frame--;
+                if (gif_frame == 4 || gif_frame == 5 || gif_frame == 9 || gif_frame == 10){
                     current_option = 0;
                 }
-                else if (gif_frame == 4 || gif_frame == 5 || gif_frame == 9 || gif_frame == 10){
+                else if (gif_frame == 3 || gif_frame == 11){
                     current_option = 1;
                 }
                 else{
@@ -342,6 +398,29 @@ int main(void)
                 goto comeback;
             }
         }
+    
+    ending:
+        clear_fullscreen();
+        draw_static_ui();
+        gif_state = 17;
+        play_gif_frame();
+        while (title_status < 3)
+        {
+            if (timeout_flag){
+                timeout_flag = 0;
+                startwait++;
+                if (startwait == 3)
+                {
+                    print("\n\a");
+                    startwait = 0;
+                    play_gif_frame();
+                    title_status++;
+                }
+            }
+        }
+        move_cursor(11, 22);
+        print("Tester test test");
 
     return 0;
+    
 }

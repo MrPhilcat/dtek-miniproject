@@ -25,5 +25,7 @@ extern const char *balcony_empathetic_scene[][13];
 extern const char *balcony_aggressive_scene[][13];
 extern const char *balcony_hesitation_scene[][13];
 extern const char *aiming_gif[][19];
+extern const char *game_over_gif[][13];
+extern const char *custom_art_frame[][13];
 
 #endif

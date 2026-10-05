@@ -12,7 +12,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"", SCENE_ELEVATOR_MENU, -1}},
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 1 // DETROIT_LOADING_GIF
+        .clueId = 0, .itemId = 0, .gif_state_number = 2 // DETROIT_LOADING_GIF
     },
     
     [SCENE_OUTSIDE_RETURN] = {
@@ -71,7 +71,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
             {"Go down the elevator", SCENE_ELEVATOR_DOWN, -1}
         },
         .success_rate_modifier = 0,
-        .clueId = 0, .itemId = 0, .gif_state_number = 4 // ANIMAL_HEAD
+        .clueId = 0, .itemId = 0, .gif_state_number = 5
     },
 
     [SCENE_ELEVATOR_DOWN] = {
@@ -111,16 +111,6 @@ const Scene story_scenes[TOTAL_SCENES] = {
         },
         .success_rate_modifier = 0,
         .clueId = -1, .itemId = 0, .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
-    },
-
-    [SCENE_KITCHEN_TABLET] = {
-        .SceneId = SCENE_KITCHEN_TABLET,
-        .location = LOCATION_KITCHEN,
-        .description = "You instantly download the household records. You learn that the deviant's name is Daniel, and that the family was recently planning to replace him. This may come in use later.",
-        .option_count = 1,
-        .options = {{"", SCENE_KITCHEN_EMPTY_MENU, -1}},
-        .success_rate_modifier = 15,
-        .clueId = CLUE_DEVIANT_NAME, .itemId = ITEM_JOHN_PHILLIPS_TABLET, .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
     },
 
     [SCENE_KITCHEN_EMPTY_TEXT] = {
@@ -277,7 +267,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
     [SCENE_BEDROOM_FIRST_TEXT] = {
         .SceneId = SCENE_BEDROOM_FIRST_TEXT,
         .location = LOCATION_BEDROOM,
-        .description = "You step into the child's bedroom. The room is cluttered with toys scattered across the floor. On a small nightstand, you notice a tablet that you can investigate.",
+        .description = "You step into the child's bedroom. The room is cluttered with toys scattered across the floor. On a small nightstand, you notice a diary that you can investigate.",
         .option_count = 1,
         .options = {{"", SCENE_BEDROOM_MENU, -1}},
         .success_rate_modifier = 0,
@@ -303,7 +293,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
     [SCENE_BEDROOM_TABLET] = {
         .SceneId = SCENE_BEDROOM_TABLET,
         .location = LOCATION_BEDROOM,
-        .description = "You turn on the tablet and quickly scan its contents. Among the writings and saved notes, you find the name 'Emma', identifying the hostage. You also spot a digital note where she has written down the password for the kitchen tablet.",
+        .description = "You open the diary and quickly scan its contents. Among the writings and saved notes, you find the name 'Emma', identifying the hostage. You also spot a digital note where she has written down the password for the kitchen tablet.",
         .option_count = 1,
         .options = {{"", SCENE_BEDROOM_EMPTY_MENU, -1}},
         .success_rate_modifier = 15,
@@ -431,7 +421,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'DROP YOUR GUN!' Shoot the deviant when the cursor is on him.",
         .option_count = 1, // En vanlig textscen som väntar på knapptryck
         .options = {{"", SCENE_BALCONY_GUN_TESTER_TWO, -1}}, // Går direkt till QTE
-        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 99 // AIMING_GIF
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 18 // AIMING_GIF
     },
 
     [SCENE_BALCONY_GUN_TESTER_TWO] = {
@@ -441,7 +431,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 3, // Dold meny för din QTE-logik (current_option blir 0, 1 eller 2 i main.c)
         .options = {
             {"", SCENE_BALCONY_DRAW_GUN_SUCCESS_TEXT, -1}, // Index 0: Träff!
-            {"", SCENE_BALCONY_DRAW_GUN_FAIL_TEXT, -1},    // Index 1: Miss!
+            {"", SCENE_BALCONY_DRAW_GUN_KILL_EMMA_TEXT, -1},    // Index 1: Träffa Emma!
             {"", SCENE_BALCONY_DRAW_GUN_FAIL_TEXT, -1}     // Index 2: Miss!
         },
         .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 99 // AIMING_GIF
@@ -542,7 +532,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_BALCONY,
         .description = "You reach into your jacket, drawing the police handgun with mechanical precision. Without hesitation, you pull the trigger. The bullet hits the rogue android squarely in the head. His grip loosens, and he collapses lifelessly.",
         .option_count = 1,
-        .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}}, 
+        .options = {{"Restart Game", SCENE_ENDING, -1}}, 
         .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     },
 
@@ -551,7 +541,16 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_BALCONY,
         .description = "A momentary glitch in your optical sensors causes your aim to falter. As you fire, your shot shatters the glass barrier. 'You lied to me!' he screams. He returns fire, striking your biocomponents, before pulling the screaming girl over the edge with him.",
         .option_count = 1,
-        .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}}, 
+        .options = {{"Restart Game", SCENE_ENDING, -1}}, 
+        .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
+    },
+
+        [SCENE_BALCONY_DRAW_GUN_KILL_EMMA_TEXT] = {
+        .SceneId = SCENE_BALCONY_DRAW_GUN_FAIL_TEXT,
+        .location = LOCATION_BALCONY,
+        .description = "A momentary glitch in your optical sensors causes your aim to falter. As you fire, your shot pierces through Emmas head. The andriod screams in despair, and decides to jump knowing that his best friend has just been killed.",
+        .option_count = 1,
+        .options = {{"Restart Game", SCENE_ENDING, -1}}, 
         .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
     },
 
@@ -650,5 +649,9 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 1,
         .options = {{"Restart Game", SCENE_OUTSIDE_START, -1}},
         .success_rate_modifier = 0, .clueId = -1, .itemId = 0, .gif_state_number = 0 // NO GIF (PLACEHOLDER) 
+    },
+
+    [SCENE_ENDING] = {
+        .SceneId = SCENE_ENDING,
     }
 };
