@@ -1,3 +1,4 @@
+# boot.S
 .data
 .align 2
 welcome_msg: .asciz "================================================\n===== RISC-V Boot-Up Process Now Complete ======\n================================================\n"

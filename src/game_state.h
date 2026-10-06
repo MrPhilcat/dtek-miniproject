@@ -1,3 +1,4 @@
+// game_state.h
 #ifndef GAME_TYPES_H
 #define GAME_TYPES_H
 
@@ -51,7 +52,6 @@ typedef struct
   int clues_discovered[TOTAL_CLUES];
   ItemID inventory[TOTAL_ITEMS];
   int inventory_count;
-
   int success_rate;
   int time;
 } GameContext;

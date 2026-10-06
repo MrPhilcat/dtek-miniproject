@@ -1,3 +1,4 @@
+// rendering.c
 #include "rendering.h"
 #include "graphics.h"
 #include "game_state.h"

@@ -1,3 +1,4 @@
+// scenes.c
 #include "scenes.h"
 
 const Scene story_scenes[TOTAL_SCENES] = {
@@ -14,7 +15,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0,
         .clueId = 0,
         .itemId = 0,
-        .gif_state_number = 2 // DETROIT_LOADING_GIF
+        .gif_state_number = 2
     },
 
     [SCENE_OUTSIDE_RETURN] = {
@@ -26,7 +27,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0,
         .clueId = 0,
         .itemId = 0,
-        .gif_state_number = 2 // SKYSCRAPER_WIDE_GIF
+        .gif_state_number = 2 
     },
 
     [SCENE_ELEVATOR_MENU] = {
@@ -37,7 +38,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0,
         .clueId = 0,
         .itemId = 0,
-        .gif_state_number = 3 // ELEVATOR_GIF
+        .gif_state_number = 3 
     },
 
     // ==========================================
@@ -52,7 +53,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0,
         .clueId = 0,
         .itemId = 0,
-        .gif_state_number = 4 // ANIMAL_HEAD
+        .gif_state_number = 4 
     },
 
     [SCENE_OFFICER_RETURN] = {
@@ -64,7 +65,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0,
         .clueId = 0, 
         .itemId = 0, 
-        .gif_state_number = 4 // ANIMAL_HEAD
+        .gif_state_number = 4 
     },
 
     [SCENE_OFFICER_MENU] = {
@@ -88,7 +89,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = 0, 
         .itemId = 0, 
-        .gif_state_number = 3 // ELEVATOR_GIF
+        .gif_state_number = 3
     },
 
     // ==========================================
@@ -103,7 +104,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
+        .gif_state_number = 7
     },
 
     [SCENE_KITCHEN_MENU] = {
@@ -114,7 +115,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
+        .gif_state_number = 7 
     },
 
     [SCENE_KITCHEN_EMPTY_TEXT] = {
@@ -126,7 +127,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
+        .gif_state_number = 6 
     },
 
     [SCENE_KITCHEN_EMPTY_MENU] = {
@@ -137,7 +138,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
+        .gif_state_number = 6 
     },
 
     // ==========================================
@@ -152,7 +153,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
+        .gif_state_number = 7 
     },
 
     [SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE] = {
@@ -163,7 +164,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
+        .gif_state_number = 7 
     },
 
     [SCENE_KITCHEN_TABLET_LOCKED_MENU_HAS_CLUE] = {
@@ -171,14 +172,13 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_KITCHEN, 
         .option_count = 2, 
         .options = {
-            // Nu står det inte längre "Enter 'Emma'"
             {"Enter the password Emma wrote down", SCENE_KITCHEN_TABLET_SUCCESS_TEXT, -1},
             {"Put the tablet down", SCENE_KITCHEN_MENU, -1}
         },
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
+        .gif_state_number = 7
     },
 
     [SCENE_KITCHEN_TABLET_WRONG_PASSWORD_TEXT] = {
@@ -190,7 +190,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 7 // KITCHEN_SCENE (WITH TABLET)
+        .gif_state_number = 7
     },
 
     [SCENE_KITCHEN_TABLET_SUCCESS_TEXT] = {
@@ -202,7 +202,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 15, 
         .clueId = CLUE_DEVIANT_NAME, 
         .itemId = ITEM_JOHN_PHILLIPS_TABLET, 
-        .gif_state_number = 6 // KITCHEN_SCENE_EMPTY
+        .gif_state_number = 6
     },
 
     // ==========================================
@@ -217,7 +217,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 9 // SOFA_AND_TABLE_SCENE (WITH GUN)
+        .gif_state_number = 9
     },
 
     [SCENE_LIVING_ROOM_MENU] = {
@@ -228,7 +228,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 9 // SOFA_AND_TABLE_SCENE (WITH GUN)
+        .gif_state_number = 9
     },
 
     [SCENE_LIVING_ROOM_GUN] = {
@@ -240,7 +240,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 10, 
         .clueId = -1, 
         .itemId = ITEM_GUN,
-        .gif_state_number = 8 // SOFA_AND_TABLE_SCENE_EMPTY
+        .gif_state_number = 8
     },
 
     [SCENE_LIVING_ROOM_EMPTY_TEXT] = {
@@ -252,7 +252,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 8 // SOFA_AND_TABLE_SCENE_EMPTY
+        .gif_state_number = 8
     },
 
     [SCENE_LIVING_ROOM_EMPTY_MENU] = {
@@ -263,7 +263,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 8 // SOFA_AND_TABLE_SCENE_EMPTY
+        .gif_state_number = 8
     },
 
     // ==========================================
@@ -278,7 +278,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 11 // DESK_BOOK_APPLE_SCENE (WITH BOOK)
+        .gif_state_number = 11
     },
 
     [SCENE_BEDROOM_MENU] = {
@@ -289,7 +289,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 11 // DESK_BOOK_APPLE_SCENE (WITH BOOK)
+        .gif_state_number = 11
     },
 
     [SCENE_BEDROOM_TABLET] = {
@@ -301,7 +301,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 15, 
         .clueId = CLUE_CHILD_NAME, 
         .itemId = ITEM_EMMAS_TABLET, 
-        .gif_state_number = 10 // DESK_BOOK_APPLE_SCENE_EMPTY
+        .gif_state_number = 10
     },
 
     [SCENE_BEDROOM_EMPTY_TEXT] = {
@@ -313,7 +313,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 10 // DESK_BOOK_APPLE_SCENE_EMPTY
+        .gif_state_number = 10
     },
 
     [SCENE_BEDROOM_EMPTY_MENU] = {
@@ -324,7 +324,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 10 // DESK_BOOK_APPLE_SCENE_EMPTY
+        .gif_state_number = 10 
     },
 
     // ==========================================
@@ -339,7 +339,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 12 // BATHROOM_SCENE
+        .gif_state_number = 12 
     },
 
     [SCENE_BATHROOM_MENU] = {
@@ -350,7 +350,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 12 // BATHROOM_SCENE
+        .gif_state_number = 12 
     },
 
     [SCENE_BATHROOM_SEARCH] = {
@@ -362,7 +362,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 12 // BATHROOM_SCENE
+        .gif_state_number = 12 
     },
 
     [SCENE_BATHROOM_EMPTY_TEXT] = {
@@ -374,7 +374,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 12 // BATHROOM_SCENE
+        .gif_state_number = 12 
     },
 
     [SCENE_BATHROOM_EMPTY_MENU] = {
@@ -385,7 +385,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 12 // BATHROOM_SCENE
+        .gif_state_number = 12 
     },
 
     // ==========================================
@@ -396,11 +396,11 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_BALCONY, 
         .description = "", 
         .option_count = 1, 
-        .options = {{"", SCENE_BALCONY_START_TEXT, -1}}, // Fallback om update_scene() missar
+        .options = {{"", SCENE_BALCONY_START_TEXT, -1}},
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     [SCENE_BALCONY_START_TEXT] = {
@@ -408,11 +408,11 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_BALCONY, 
         .description = "You step out through the sliding glass doors onto the wind-swept balcony. The deafening roar of a police helicopter fills the night air... Every choice you make now will determine if they both live or die.", 
         .option_count = 1, 
-        .options = {{"", SCENE_BALCONY_INTERMEDIARY_1, -1}}, // Går till checkern som dirigerar till rätt meny
+        .options = {{"", SCENE_BALCONY_INTERMEDIARY_1, -1}}, 
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     // ==========================================
@@ -422,32 +422,32 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .SceneId = SCENE_BALCONY_GUN_TESTER, 
         .location = LOCATION_BALCONY, 
         .description = "'DROP YOUR GUN!' Shoot the deviant when the cursor is on him (press the button to shoot).",
-        .option_count = 1,                                   // En vanlig textscen som väntar på knapptryck
-        .options = {{"", SCENE_BALCONY_GUN_TESTER_TWO, -1}}, // Går direkt till QTE
+        .option_count = 1,  
+        .options = {{"", SCENE_BALCONY_GUN_TESTER_TWO, -1}},
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 18 // AIMING_GIF
+        .gif_state_number = 18
     },
 
     [SCENE_BALCONY_GUN_TESTER_TWO] = {
         .SceneId = SCENE_BALCONY_GUN_TESTER_TWO, 
         .location = LOCATION_BALCONY, 
         .description = "",
-        .option_count = 3, // Dold meny för din QTE-logik (current_option blir 0, 1 eller 2 i main.c)
+        .option_count = 3, 
         .options = {
-            {"", SCENE_BALCONY_DRAW_GUN_SUCCESS_TEXT, -1},   // Index 0: Träff!
-            {"", SCENE_BALCONY_DRAW_GUN_KILL_EMMA_TEXT, -1}, // Index 1: Träffa Emma!
-            {"", SCENE_BALCONY_DRAW_GUN_FAIL_TEXT, -1}       // Index 2: Miss!
+            {"", SCENE_BALCONY_DRAW_GUN_SUCCESS_TEXT, -1},   // Index 0: Hit andriod
+            {"", SCENE_BALCONY_DRAW_GUN_KILL_EMMA_TEXT, -1}, // Index 1: Hit Emma
+            {"", SCENE_BALCONY_DRAW_GUN_FAIL_TEXT, -1}       // Index 2: Missed
         },
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 99 // AIMING_GIF
+        .gif_state_number = 99
     },
 
     // ==========================================
-    // BALCONY - MENYER DEL 1
+    // BALCONY - MENU FOR PART 1
     // ==========================================
     [SCENE_BALCONY_MENU_NONE] = {
         .SceneId = SCENE_BALCONY_MENU_NONE, 
@@ -457,7 +457,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     [SCENE_BALCONY_MENU_NAME] = {
@@ -468,7 +468,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     [SCENE_BALCONY_MENU_GUN] = {
@@ -477,12 +477,12 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .option_count = 2, 
         .options = {
             {"Approach slowly and reassure him", SCENE_BALCONY_DIALOGUE_1_TEXT, -1}, 
-            {"Draw hidden gun", SCENE_BALCONY_GUN_TESTER, -1} // Går till din gun tester!
+            {"Draw hidden gun", SCENE_BALCONY_GUN_TESTER, -1} 
         },
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     [SCENE_BALCONY_MENU_BOTH] = {
@@ -492,16 +492,16 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .options = {
             {"Approach slowly and reassure him", SCENE_BALCONY_DIALOGUE_1_TEXT, -1}, 
             {"Call him by his name (Daniel)", SCENE_BALCONY_CALL_NAME_TEXT, -1}, 
-            {"Draw hidden gun", SCENE_BALCONY_GUN_TESTER, -1} // Går till din gun tester!
+            {"Draw hidden gun", SCENE_BALCONY_GUN_TESTER, -1} 
         },
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     // ==========================================
-    // BALCONY - DIALOGÖVERGÅNGAR DEL 1
+    // BALCONY - DIALOGE PART 1
     // ==========================================
     [SCENE_BALCONY_DIALOGUE_1_TEXT] = {
         .SceneId = SCENE_BALCONY_DIALOGUE_1_TEXT, 
@@ -512,7 +512,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     [SCENE_BALCONY_CALL_NAME_TEXT] = {
@@ -524,7 +524,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 5, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 14 // BALCONY_EMPATHETIC_SCENE
+        .gif_state_number = 14 
     },
 
     [SCENE_BALCONY_ORDER_SURRENDER_TEXT] = {
@@ -536,7 +536,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 15 // BALCONY_AGGRESSIVE_SCENE
+        .gif_state_number = 15 
     },
 
     [SCENE_BALCONY_INTERMEDIARY_2] = {
@@ -544,15 +544,15 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .location = LOCATION_BALCONY, 
         .description = "", 
         .option_count = 1, 
-        .options = {{"", SCENE_BALCONY_DIALOGUE_1_MENU_NONE, -1}}, // Checkern pekar om denna
+        .options = {{"", SCENE_BALCONY_DIALOGUE_1_MENU_NONE, -1}}, 
         .success_rate_modifier = 0,
         .clueId = -1,
         .itemId = 0,
-        .gif_state_number = 13 // BALCONY_STANDOFF_SCENE
+        .gif_state_number = 13 
     },
 
     // ==========================================
-    // BALCONY - VAPENSLUT
+    // BALCONY - GUN ENDINGS
     // ==========================================
     [SCENE_BALCONY_DRAW_GUN_SUCCESS_TEXT] = {
         .SceneId = SCENE_BALCONY_DRAW_GUN_SUCCESS_TEXT, 
@@ -563,7 +563,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 24 // NO GIF (PLACEHOLDER)
+        .gif_state_number = 24 
     },
 
     [SCENE_BALCONY_DRAW_GUN_FAIL_TEXT] = {
@@ -575,7 +575,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 22 // NO GIF (PLACEHOLDER)
+        .gif_state_number = 22 
     },
 
     [SCENE_BALCONY_DRAW_GUN_KILL_EMMA_TEXT] = {
@@ -587,11 +587,11 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 25 // NO GIF (PLACEHOLDER)
+        .gif_state_number = 25 
     },
 
     // ==========================================
-    // BALCONY - MENYER DEL 2
+    // BALCONY - MENU PART 2
     // ==========================================
     [SCENE_BALCONY_DIALOGUE_1_MENU_NONE] = {
         .SceneId = SCENE_BALCONY_DIALOGUE_1_MENU_NONE, 
@@ -601,7 +601,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 16 // BALCONY_HESITATION_SCENE
+        .gif_state_number = 16 
     },
 
     [SCENE_BALCONY_DIALOGUE_1_MENU_EMMA] = {
@@ -612,11 +612,11 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 16 // BALCONY_HESITATION_SCENE
+        .gif_state_number = 16
     },
 
     // ==========================================
-    // BALCONY - DIALOGÖVERGÅNGAR DEL 2
+    // BALCONY - DIALOGE PART 2
     // ==========================================
     [SCENE_BALCONY_SYMPATHIZE_TEXT] = {
         .SceneId = SCENE_BALCONY_SYMPATHIZE_TEXT, 
@@ -627,7 +627,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 5, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 14 // BALCONY_EMPATHETIC_SCENE
+        .gif_state_number = 14 
     },
 
     [SCENE_BALCONY_MENTION_EMMA_TEXT] = {
@@ -636,10 +636,10 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .description = "'Think about Emma, Daniel. She loves you. You are a part of her family.' The deviant hesitates, looking down at the crying girl. 'I... I didn't want to hurt her...' he stammers, his mechanical voice breaking.", 
         .option_count = 1, 
         .options = {{"", SCENE_BALCONY_DIALOGUE_2_MENU, -1}}, 
-        .success_rate_modifier = 0, 
+        .success_rate_modifier = 5, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 14 // BALCONY_EMPATHETIC_SCENE
+        .gif_state_number = 14 
     },
 
     [SCENE_BALCONY_DEMAND_LET_GO_TEXT] = {
@@ -651,11 +651,11 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 15 // BALCONY_AGGRESSIVE_SCENE
+        .gif_state_number = 15
     },
 
     // ==========================================
-    // BALCONY - FINAL MENY OCH SLUT
+    // BALCONY - FINAL MENU AND ENDING
     // ==========================================
     [SCENE_BALCONY_DIALOGUE_2_MENU] = {
         .SceneId = SCENE_BALCONY_DIALOGUE_2_MENU, 
@@ -666,7 +666,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 16 // BALCONY_HESITATION_SCENE
+        .gif_state_number = 16 
     },
 
         [SCENE_BALCONY_DIALOGUE_2_MENU_WITH_GUN] = {
@@ -678,7 +678,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 16 // BALCONY_HESITATION_SCENE
+        .gif_state_number = 16
     },
 
     [SCENE_BALCONY_CONVINCE_SUCCESS_TEXT] = {
@@ -690,7 +690,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 23 // NO GIF (PLACEHOLDER)
+        .gif_state_number = 23 
     },
 
     [SCENE_BALCONY_CONVINCE_FAIL_TEXT] = {
@@ -702,7 +702,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 22 // NO GIF (PLACEHOLDER)
+        .gif_state_number = 22
     },
 
     [SCENE_BALCONY_SACRIFICE_TEXT] = {
@@ -714,7 +714,7 @@ const Scene story_scenes[TOTAL_SCENES] = {
         .success_rate_modifier = 0, 
         .clueId = -1, 
         .itemId = 0, 
-        .gif_state_number = 23 // NO GIF (PLACEHOLDER)
+        .gif_state_number = 23 
     },
 
     [SCENE_ENDING_SUCCESS] = {

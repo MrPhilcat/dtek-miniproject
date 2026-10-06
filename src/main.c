@@ -1,3 +1,4 @@
+// main.c
 // Below functions are external and found in other files
 #include "dtekv-lib.h"
 #include "rendering.h"
@@ -14,11 +15,10 @@ int gif_frame = 0;
 GameContext game;
 volatile int current_option = 0;
 
-
 //Local Variables
 char timeoutcount = 0;
-volatile char timeout_flag = 0; 
-
+volatile char timeout_flag = 0;
+int met_officer = 0;
 
 // Define addrsses for timer values
 #define TIMER_STATUS   (*(volatile unsigned short*)(0x04000020))
@@ -58,6 +58,7 @@ void handle_interrupt(unsigned cause) {
     timeout_flag = 1;
 }
 
+// Initializes the main game, only executed once
 void startup(){
     clear_display();
     clear_text();
@@ -149,8 +150,18 @@ void update_scene()
 {
     int target_scene = story_scenes[game.scene_index].options[current_option].nextSceneId;
 
+    // Special cases where options are impacted by game state variables
     switch (target_scene)
     {
+        case SCENE_OFFICER_FIRST:
+            if (!met_officer){
+                target_scene = SCENE_OFFICER_FIRST;
+                met_officer = 1;
+            }
+            else {
+                target_scene = SCENE_OFFICER_RETURN;
+            }
+            break;
         
         case SCENE_KITCHEN_FIRST_TEXT:
             if (game.inventory[ITEM_JOHN_PHILLIPS_TABLET] == ITEM_JOHN_PHILLIPS_TABLET)
@@ -182,7 +193,6 @@ void update_scene()
 
         case SCENE_BALCONY_INTERMEDIARY_1:
         {
-            // Braces are required here to declare variables inside a case statement
             int has_name = (game.clues_discovered[CLUE_DEVIANT_NAME] == CLUE_DEVIANT_NAME);
             int has_gun = (game.inventory[ITEM_GUN] == ITEM_GUN);
 
@@ -206,7 +216,6 @@ void update_scene()
         }
 
         case SCENE_BALCONY_INTERMEDIARY_2:
-            // Condensed to remove the need for a local variable and brackets
             if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
             {
                 target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_EMMA;
@@ -229,12 +238,10 @@ void update_scene()
             {
                 target_scene = SCENE_BALCONY_DIALOGUE_2_MENU_WITH_GUN;
             }
-            // The original 'else' block assigning it to itself was removed as redundant
             break;
     }
-
     game.scene_index = target_scene;
-    current_option = 0;
+    current_option = 0; // Reset option selection
 
     Scene scene_struct = story_scenes[game.scene_index];
 
@@ -246,17 +253,19 @@ void update_scene()
         gif_state = scene_struct.gif_state_number; 
         play_gif_frame(); // Draw the new image IMMEDIATELY, don't wait for the timer
     }
-    
+
     if (scene_struct.option_count > 1)
     {
+        // If only one option interprit as a text window (skip option selector)
         print_options(scene_struct);
     }
     else
     {
+        // If multiple option interprit as an option selector (skip description)
         print_text(scene_struct.description);
     }
 
-
+    // Updates the inventory and clues player has
     if (scene_struct.itemId != 0)
     {
         game.inventory[scene_struct.itemId] = scene_struct.itemId;
@@ -268,10 +277,11 @@ void update_scene()
         game.clues_discovered[scene_struct.clueId] = scene_struct.clueId;
     }
 
-
+    // Updtate and render location and success rate
     place = (char *)get_location_name(scene_struct.location);
     render_place();
     success_rate += scene_struct.success_rate_modifier;
+    render_success_rate();
 }
 
 int main(void) {
@@ -285,7 +295,7 @@ int main(void) {
     hide_cursor();
     draw_static_ui();
 
-    // Special logic for loaging title screen with slower fps and sound effect
+    // Special logic for loading title screen with slower fps and sound effect
     int title_status = 0;
     int startwait = 0;
     gif_state = 1;
@@ -391,7 +401,7 @@ int main(void) {
                 clear_fullscreen();
                 draw_static_ui();
                 
-                // Outccome based on what the player shot
+                // Outcome based on what the player shot
                 gif_frame--;
                 if (gif_frame == 4 || gif_frame == 5 || gif_frame == 9 || gif_frame == 10){
                     // Shot deviant
@@ -408,6 +418,10 @@ int main(void) {
                 
                 // Go to next scene
                 update_scene();
+                // Update infobar format to show information, instead of placeholder
+                move_cursor(2, 1);
+                print((char*)ui_info2);
+                
                 goto comeback;
             }
         }
@@ -415,19 +429,24 @@ int main(void) {
     ending:
         clear_fullscreen();
         draw_static_ui();
-        if (game.scene_index == SCENE_ENDING_SUCCESS){
-            gif_state = 17;
+
+        switch (game.scene_index) {
+            case SCENE_ENDING_SUCCESS:
+                gif_state = 17;
+                break;
+            case SCENE_ENDING_YOU_DIE:
+                gif_state = 19;
+                break;
+            case SCENE_ENDING_YOU_DIE_EMMA_DIE:
+                gif_state = 20;
+                break;
+            case SCENE_ENDING_EMMA_DIE:
+                gif_state = 21;
+                break;
+            default:
+                break;
         }
-        else if (game.scene_index == SCENE_ENDING_YOU_DIE){
-            gif_state = 19;
-        }
-        else if (game.scene_index == SCENE_ENDING_YOU_DIE_EMMA_DIE){
-            gif_state = 20;
-        }
-        else if (game.scene_index == SCENE_ENDING_EMMA_DIE)
-        {
-            gif_state = 21;
-        }
+        // Similar logic to title sceen
         play_gif_frame();
         while (title_status < 2)
         {
@@ -444,16 +463,16 @@ int main(void) {
             }
         }
     while(!get_button_state()) {
-        // Väntar i en oändlig loop tills knappen trycks ner
+        // Waits in an infinite loop until the button is pressed
     }
         
-    // 2. Rensa hela terminalen så den blir svart och tom
+    // Clear the entire terminal
     clear_fullscreen();
     
-    // 3. Återställ terminalens markör (motsatsen till hide_cursor)
+    // Restore the terminal cursor (the opposite of hide_cursor)
     print("\x1b[?25h");
     
-    // 4. Stäng programmet och ge tillbaka kommandotolken till användaren
+    // Close the program and return the command prompt to the user.
     return 0;
     
 }
