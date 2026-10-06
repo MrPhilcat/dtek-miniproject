@@ -19,11 +19,8 @@ void move_cursor(unsigned int row, unsigned int col) {
 
 // Call to delete ALL text on entire screen
 void clear_fullscreen() {
-    // \x1b[   -> Start escape sequence
-    // 2J      -> Clear entire display
-    print("\x1b[2J");
-    // \x1b[H  -> Move cursor to home position (Row 1, Col 1)
-    print("\x1b[H"); 
+    print("\x1b[2J"); // Clear entire display
+    print("\x1b[H"); // Move cursor to home position (Row 1, Col 1)
 }
 
 // Call to delete all text on the graphical display part of the screen

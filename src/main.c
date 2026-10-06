@@ -1,10 +1,9 @@
-/* Below functions are external and found in other files. */
+// Below functions are external and found in other files
 #include "dtekv-lib.h"
 #include "rendering.h"
 #include "graphics.h"
 #include "game_state.h"
 #include "scenes.h"
-extern void enable_interrupt(void);
 
 // Global variables
 unsigned int success_rate = 50;
@@ -15,9 +14,10 @@ int gif_frame = 0;
 GameContext game;
 volatile int current_option = 0;
 
+
 //Local Variables
 char timeoutcount = 0;
-volatile char timeout_flag = 0;
+volatile char timeout_flag = 0; 
 
 
 // Define addrsses for timer values
@@ -26,11 +26,16 @@ volatile char timeout_flag = 0;
 #define TIMER_PERIOD_L (*(volatile unsigned short*)(0x04000028))
 #define TIMER_PERIOD_H (*(volatile unsigned short*)(0x0400002C))
 
+// Define addrsses for input IO
 #define SWITCHES (*(volatile unsigned int*)(0x04000010))
 #define BUTTON (*(volatile unsigned int*)(0x040000d0))
 
-/* Code for initializing interrupts. */
-void timer_interupt_initialize(void){
+// How many while loop cycles before secondary input can be registered?
+#define DEBOUNCE_COOLDOWN 10000 
+
+
+/* Code for initializing timer. */
+void timer_initialize(void) {
   
   // Set period to 10 000 000 (1/3 of frequency)
   TIMER_PERIOD_L = 0x9680;
@@ -39,18 +44,16 @@ void timer_interupt_initialize(void){
   // Clear old timeout flag (if any)
   TIMER_STATUS = 0b0;
 
-  // Interupts: Yes, Looping: Yes, Start: Yes, Stop: No
-  TIMER_CONTROL = 0b0111;
-
-  enable_interrupt();
+  // Interupts: No, Looping: Yes, Start: Yes, Stop: No
+  TIMER_CONTROL = 0b0110;
 }
 
 
 /* Below is the function that will be called when an interrupt is triggered. */
-void handle_interrupt(unsigned cause){
+// UNUSED, replaced with direct timeout flag polling
+void handle_interrupt(unsigned cause) {
     // Reset the interrupt
     TIMER_STATUS = 0;
-
     // Indicate timeout
     timeout_flag = 1;
 }
@@ -70,9 +73,6 @@ void startup(){
     print_text(story_scenes[game.scene_index].description);
     gif_state = story_scenes[game.scene_index].gif_state_number;
 }
-
-// How many while loop cycles before secondary input can be registered?
-#define DEBOUNCE_COOLDOWN 10000 
 
 int get_switch_state() {
     static unsigned int last_switch_state = 0;
@@ -149,95 +149,88 @@ void update_scene()
 {
     int target_scene = story_scenes[game.scene_index].options[current_option].nextSceneId;
 
-    if (target_scene == SCENE_KITCHEN_FIRST_TEXT)
+    switch (target_scene)
     {
-        if (game.inventory[ITEM_JOHN_PHILLIPS_TABLET] == ITEM_JOHN_PHILLIPS_TABLET)
-        {
-            target_scene = SCENE_KITCHEN_EMPTY_TEXT;
-        }
-    }
-    
-    else if (target_scene == SCENE_LIVING_ROOM_FIRST_TEXT)
-    {
-        if (game.inventory[ITEM_GUN] == ITEM_GUN)
-        {
-            target_scene = SCENE_LIVING_ROOM_EMPTY_TEXT;
-        }
-    }
-    
-    else if (target_scene == SCENE_BEDROOM_FIRST_TEXT)
-    {
-        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
-        { 
-            target_scene = SCENE_BEDROOM_EMPTY_TEXT;
-        }
-    }
+        
+        case SCENE_KITCHEN_FIRST_TEXT:
+            if (game.inventory[ITEM_JOHN_PHILLIPS_TABLET] == ITEM_JOHN_PHILLIPS_TABLET)
+            {
+                target_scene = SCENE_KITCHEN_EMPTY_TEXT;
+            }
+            break;
 
+        case SCENE_LIVING_ROOM_FIRST_TEXT:
+            if (game.inventory[ITEM_GUN] == ITEM_GUN)
+            {
+                target_scene = SCENE_LIVING_ROOM_EMPTY_TEXT;
+            }
+            break;
 
-    else if (target_scene == SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE)
-    {
-        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
-        {
-            target_scene = SCENE_KITCHEN_TABLET_LOCKED_MENU_HAS_CLUE;
-        }
-    }
+        case SCENE_BEDROOM_FIRST_TEXT:
+            if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
+            { 
+                target_scene = SCENE_BEDROOM_EMPTY_TEXT;
+            }
+            break;
 
-    else if (target_scene == SCENE_BALCONY_INTERMEDIARY_1)
-    {
-        int has_name = 0;
-        int has_gun = 0;
+        case SCENE_KITCHEN_TABLET_LOCKED_MENU_NO_CLUE:
+            if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
+            {
+                target_scene = SCENE_KITCHEN_TABLET_LOCKED_MENU_HAS_CLUE;
+            }
+            break;
 
-        if (game.clues_discovered[CLUE_DEVIANT_NAME] == CLUE_DEVIANT_NAME)
+        case SCENE_BALCONY_INTERMEDIARY_1:
         {
-            has_name = 1;
-        }
-        if (game.inventory[ITEM_GUN] == ITEM_GUN)
-        {
-            has_gun = 1;
-        }
+            // Braces are required here to declare variables inside a case statement
+            int has_name = (game.clues_discovered[CLUE_DEVIANT_NAME] == CLUE_DEVIANT_NAME);
+            int has_gun = (game.inventory[ITEM_GUN] == ITEM_GUN);
 
-        if (has_name && has_gun)
-        {
-            target_scene = SCENE_BALCONY_MENU_BOTH;
-        }
-        else if (has_name)
-        {
-            target_scene = SCENE_BALCONY_MENU_NAME;
-        }
-        else if (has_gun)
-        {
-            target_scene = SCENE_BALCONY_MENU_GUN;
-        }
-        else
-        {
-            target_scene = SCENE_BALCONY_MENU_NONE;
-        }
-    }
-    else if (target_scene == SCENE_BALCONY_INTERMEDIARY_2)
-    {
-        int knows_emma = 0;
-
-        if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
-        {
-            knows_emma = 1;
+            if (has_name && has_gun)
+            {
+                target_scene = SCENE_BALCONY_MENU_BOTH;
+            }
+            else if (has_name)
+            {
+                target_scene = SCENE_BALCONY_MENU_NAME;
+            }
+            else if (has_gun)
+            {
+                target_scene = SCENE_BALCONY_MENU_GUN;
+            }
+            else
+            {
+                target_scene = SCENE_BALCONY_MENU_NONE;
+            }
+            break;
         }
 
-        if (knows_emma)
-        {
-            target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_EMMA;
-        }
-        else
-        {
-            target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_NONE;
-        }
-    }
-    else if (target_scene == SCENE_BALCONY_CONVINCE_SUCCESS_TEXT)
-    {
-        // Om spelaren inte har skrapat ihop minst 99% probability, misslyckas försöket!
-        if (success_rate < 99)
-        {
-            target_scene = SCENE_BALCONY_CONVINCE_FAIL_TEXT;
-        }
+        case SCENE_BALCONY_INTERMEDIARY_2:
+            // Condensed to remove the need for a local variable and brackets
+            if (game.clues_discovered[CLUE_CHILD_NAME] == CLUE_CHILD_NAME)
+            {
+                target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_EMMA;
+            }
+            else
+            {
+                target_scene = SCENE_BALCONY_DIALOGUE_1_MENU_NONE;
+            }
+            break;
+
+        case SCENE_BALCONY_CONVINCE_SUCCESS_TEXT:
+            if (success_rate < 88)
+            {
+                target_scene = SCENE_BALCONY_CONVINCE_FAIL_TEXT;
+            }
+            break;
+
+        case SCENE_BALCONY_DIALOGUE_2_MENU:
+            if (game.inventory[ITEM_GUN] == ITEM_GUN)
+            {
+                target_scene = SCENE_BALCONY_DIALOGUE_2_MENU_WITH_GUN;
+            }
+            // The original 'else' block assigning it to itself was removed as redundant
+            break;
     }
 
     game.scene_index = target_scene;
@@ -281,14 +274,13 @@ void update_scene()
     success_rate += scene_struct.success_rate_modifier;
 }
 
-int main(void)
-{
+int main(void) {
     // Variables used for storing IO polling
-    int switch_state;
-    int button_state;
+    int switch_state = 0;
+    int button_state = 0;
     
     // Start the timer and draw the UI
-    timer_interupt_initialize();
+    timer_initialize();
     clear_fullscreen();
     hide_cursor();
     draw_static_ui();
@@ -300,8 +292,8 @@ int main(void)
     play_gif_frame();
     while (title_status < 5)
     {
-        if (timeout_flag){
-            timeout_flag = 0;
+        if (TIMER_STATUS & 0b1){
+            TIMER_STATUS = 0b0;
             startwait++;
             if (startwait == 3)
             {
@@ -322,10 +314,12 @@ int main(void)
     {
         switch_state = get_switch_state();
     }
-
+    
     // Update infobar format to show information, instead of placeholder
     move_cursor(2, 1);
     print((char*)ui_info2);
+    
+
     
     // Intitialize core gameloop
     startup();
@@ -349,9 +343,9 @@ int main(void)
             update_scene();
         }
 
-        // Check if an interrupt signaled a new frame
-        if (timeout_flag){
-            timeout_flag = 0; // Clear the flag
+        // Check for timeout flag through polling
+        if (TIMER_STATUS & 0b1){
+            TIMER_STATUS = 0; // Clear the flag
 
             // Check for two special scenes with custom logic
             if(game.scene_index == SCENE_BALCONY_GUN_TESTER_TWO){
@@ -379,21 +373,19 @@ int main(void)
         }
     }
     quicktime:
-        clear_fullscreen();
-        draw_static_ui();
         gif_state = 0;
         play_gif_frame();
         gif_state = 99;
         while (1){
-            if (timeout_flag){
-                timeout_flag = 0; // Clear the flag
+            if (TIMER_STATUS & 0b1){
+                TIMER_STATUS = 0; // Clear the flag
                 play_gif_frame();
             }
 
             button_state = get_button_state();
             if(button_state){
                 // Make a sound (shot)
-                print("\a"); 
+                print("\n\a"); 
                 
                 // Clear terminal and redraw UI (which was "broken" by large image), no info bar needed
                 clear_fullscreen();
@@ -439,8 +431,8 @@ int main(void)
         play_gif_frame();
         while (title_status < 2)
         {
-            if (timeout_flag){
-                timeout_flag = 0;
+            if (TIMER_STATUS & 0b1){
+                TIMER_STATUS = 0;
                 startwait++;
                 if (startwait == 3)
                 {
@@ -452,16 +444,16 @@ int main(void)
             }
         }
     while(!get_button_state()) {
-            // Väntar i en oändlig loop tills knappen trycks ner
-        }
+        // Väntar i en oändlig loop tills knappen trycks ner
+    }
         
-        // 2. Rensa hela terminalen så den blir svart och tom
-        clear_fullscreen();
-        
-        // 3. Återställ terminalens markör (motsatsen till hide_cursor)
-        print("\x1b[?25h");
-        
-        // 4. Stäng programmet och ge tillbaka kommandotolken till användaren
-        return 0;
+    // 2. Rensa hela terminalen så den blir svart och tom
+    clear_fullscreen();
+    
+    // 3. Återställ terminalens markör (motsatsen till hide_cursor)
+    print("\x1b[?25h");
+    
+    // 4. Stäng programmet och ge tillbaka kommandotolken till användaren
+    return 0;
     
 }

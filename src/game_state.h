@@ -49,7 +49,7 @@ typedef struct
   int scene_index;
   LocationID location;
   int clues_discovered[TOTAL_CLUES];
-  ItemID inventory[INVENTORY_CAPACITY];
+  ItemID inventory[TOTAL_ITEMS];
   int inventory_count;
 
   int success_rate;

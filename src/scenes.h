@@ -21,7 +21,7 @@ typedef struct
   int gif_state_number;
   int option_index;
   int itemId;
-  int clueId
+  int clueId;
 } Scene;
 
 typedef enum
@@ -108,6 +108,7 @@ typedef enum
 
   // Final meny
   SCENE_BALCONY_DIALOGUE_2_MENU,
+  SCENE_BALCONY_DIALOGUE_2_MENU_WITH_GUN,
 
   // Sluten
   SCENE_BALCONY_CONVINCE_SUCCESS_TEXT,
