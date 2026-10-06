@@ -221,7 +221,7 @@ void draw_image(const char **image, int num_rows, int start_row, int start_col) 
 
 // Helper function to draw the next animation frame by only updating rows that changed (delta rendering)
 static void render_gif_delta(const char **gif_data, int rows, int total_frames, int start_row, int start_col, int force_redraw) {
-    // If there's only 1 frame and we aren't forced to redraw, nothing could have changed.
+    // Not waste comute if its a single frame GIF (image)
     if (total_frames <= 1 && !force_redraw) {
         return;
     }
@@ -235,7 +235,7 @@ static void render_gif_delta(const char **gif_data, int rows, int total_frames, 
     }
 
     for (int i = 0; i < rows; i++) {
-        // Interprit input array according to its totalt amount of rows
+        // Find correct frames and go through its rows, based on rows per frame.
         const char *current_row_str = gif_data[gif_frame * rows + i];
         const char *prev_row_str    = gif_data[prev_frame * rows + i];
 
@@ -253,7 +253,7 @@ static void render_gif_delta(const char **gif_data, int rows, int total_frames, 
 }
 
 // Global variable to keep track if gif has changed
-static int prev_gif_state = -1;
+static int prev_gif_state = -1; // Always starts as dfferent
 
 // Call to render the next frame of the currently active ASCII animation.
 //
@@ -353,38 +353,47 @@ void play_gif_frame() {
             break;
 
         case 17:
+            // success_survived_gif: 3 frames total, 19 rows each, 78 chars wide
             render_gif_delta((const char **)success_survived_gif, 19, 3, 4, 2, force_redraw);
             break;
 
         case 18:
+            // custom_art_frame: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)custom_art_frame, 13, 1, 4, 2, force_redraw);
             break;
 
         case 19:
+            // game_over_sacrifice_gif: 3 frames total, 19 rows each, 78 chars wide
             render_gif_delta((const char **)game_over_sacrifice_gif, 19, 3, 4, 2, force_redraw);
             break;
 
         case 20:
+            // game_over_fail_gif: 3 frames total, 19 rows each, 78 chars wide
             render_gif_delta((const char **)game_over_fail_gif, 19, 3, 4, 2, force_redraw);
             break;
 
         case 21:
+            // game_over_survived_alone_gif: 3 frames total, 19 rows each, 78 chars wide
             render_gif_delta((const char **)game_over_survived_alone_gif, 19, 3, 4, 2, force_redraw);
             break;
 
         case 22:
+            // balcony_empty_scene: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)balcony_empty_scene, 13, 1, 4, 2, force_redraw);
             break;
 
         case 23:
+            // balcony_daniel_alone_scene: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)balcony_daniel_alone_scene, 13, 1, 4, 2, force_redraw);
             break;
 
         case 24:
+            // balcony_daniel_dead_scene: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)balcony_daniel_dead_scene, 13, 1, 4, 2, force_redraw);
             break;
 
         case 25:
+            // balcony_emma_alone_scene: 1 frame total, 13 rows each, 78 chars wide
             render_gif_delta((const char **)balcony_emma_alone_scene, 13, 1, 4, 2, force_redraw);
             break;
 

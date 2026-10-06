@@ -10,6 +10,9 @@
 // Call to hide terminal cursor
 void hide_cursor();
 
+// Manually move the cursor to a specific row & col (mainly a helper function)
+void move_cursor(unsigned int row, unsigned int col);
+
 // Call to delete ALL text on entire screen
 void clear_fullscreen();
 
@@ -44,8 +47,6 @@ void render_time();
 // Print the input string in the text box with proper formatting (string must fit in box).
 // OBS! Doesn't automatically clear old text in the window; make sure to use clear_text() first.
 void print_text(const char *text);
-
-void move_cursor(unsigned int row, unsigned int col);
 
 void print_options(Scene scene);
 

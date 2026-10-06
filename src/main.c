@@ -71,7 +71,7 @@ void startup(){
     gif_state = story_scenes[game.scene_index].gif_state_number;
 }
 
-
+// How many while loop cycles before secondary input can be registered?
 #define DEBOUNCE_COOLDOWN 10000 
 
 int get_switch_state() {
@@ -81,26 +81,23 @@ int get_switch_state() {
 
     unsigned int current_switch_state = SWITCHES & 0x1;
 
-    // On the very first run, record the physical state of the switch 
-    // so it doesn't trigger a fake transition.
+    // On the very first run, record the physical state of the switch so it doesn't auto trigger.
     if (!initialized) {
         last_switch_state = current_switch_state;
         initialized = 1;
         return 0;
     }
 
-    // FIX 2: The Double Input Bug
-    // If the cooldown timer is active, the switch recently changed state. 
-    // Decrement the timer and ignore all physical bouncing.
+    // If the cooldown timer is active, the switch recently triggered, block input.
     if (cooldown > 0) {
         cooldown--;
         return 0;
     }
 
-    // Normal Edge Detection
+    // Edge Detection
     if (current_switch_state != last_switch_state) {
         last_switch_state = current_switch_state;
-        cooldown = DEBOUNCE_COOLDOWN; // Start the debounce timer
+        cooldown = DEBOUNCE_COOLDOWN; // Start the debounce timer agian
         
         if (current_switch_state == 1) {
             return 1; // Trigger on the rising edge
@@ -119,7 +116,7 @@ int get_button_state()
 
     unsigned int current_button_state = BUTTON & 0x1;
 
-    // FIX 1: Prevent startup trigger if button is held down
+    // On the very first run, record the physical state of the button so it doesn't auto trigger.
     if (!initialized)
     {
         last_button_state = current_button_state;
@@ -127,7 +124,7 @@ int get_button_state()
         return 0;
     }
 
-    // FIX 2: Ignore inputs while button is mechanically bouncing
+    // If the cooldown timer is active, the button recently triggered, block input.
     if (cooldown > 0)
     {
         cooldown--;
@@ -249,11 +246,12 @@ void update_scene()
     Scene scene_struct = story_scenes[game.scene_index];
 
     clear_text();
+
     // Only wipe the screen and redraw if the image is ACTUALLY changing
     if (gif_state != scene_struct.gif_state_number){
         clear_display();
         gif_state = scene_struct.gif_state_number; 
-        play_gif_frame(); // Draw the new image IMMEDIATELY, don't wait for the timer!
+        play_gif_frame(); // Draw the new image IMMEDIATELY, don't wait for the timer
     }
     
     if (scene_struct.option_count > 1)
@@ -285,14 +283,17 @@ void update_scene()
 
 int main(void)
 {
+    // Variables used for storing IO polling
     int switch_state;
     int button_state;
     
+    // Start the timer and draw the UI
     timer_interupt_initialize();
     clear_fullscreen();
     hide_cursor();
     draw_static_ui();
 
+    // Special logic for loaging title screen with slower fps and sound effect
     int title_status = 0;
     int startwait = 0;
     gif_state = 1;
@@ -311,26 +312,31 @@ int main(void)
             }
         }
     }
+
+    // Reset variable for ending
     title_status = 0;
+
+    // Wait for input to leave title screen
     print_text("Use button to toggle options and switch 1 to select.\n\n\n >[Start]");
     while (!switch_state)
     {
         switch_state = get_switch_state();
     }
+
+    // Update infobar format to show information, instead of placeholder
     move_cursor(2, 1);
     print((char*)ui_info2);
     
-    
-    
-    
-    // Main program loop will go here
+    // Intitialize core gameloop
     startup();
-    
     while(1) {
-        comeback:
+        comeback: //After quicktime event
+
+        // Update button values through polling
         switch_state = get_switch_state();
         button_state = get_button_state();
 
+        // If button pressed and scene has multiple options; switch selected option and rerender the option select
         if (button_state) {
             if(story_scenes[game.scene_index].option_count > 1){
                 current_option = (current_option + 1) % story_scenes[game.scene_index].option_count;
@@ -338,12 +344,16 @@ int main(void)
             }
         }
         
+        // Switch moves the game forward (next text or choose selected option)
         if (switch_state) {
             update_scene();
         }
 
         // Check if an interrupt signaled a new frame
         if (timeout_flag){
+            timeout_flag = 0; // Clear the flag
+
+            // Check for two special scenes with custom logic
             if(game.scene_index == SCENE_BALCONY_GUN_TESTER_TWO){
                 goto quicktime;
             }
@@ -352,7 +362,7 @@ int main(void)
                 goto ending;
             }
 
-            timeout_flag = 0; // Clear the flag
+            // Play next frame of current GIF
             play_gif_frame();
 
             // Update timer
@@ -379,36 +389,33 @@ int main(void)
                 timeout_flag = 0; // Clear the flag
                 play_gif_frame();
             }
+
             button_state = get_button_state();
             if(button_state){
-                // 1. Ta bort \n! \a spelar ljudet, radbrytningen förstör grafiken.
+                // Make a sound (shot)
                 print("\a"); 
                 
-                // 2. Rensa hela terminalen så att eventuella gamla upp-scrollade 
-                // rester försvinner innan vi ritar nya ramar.
+                // Clear terminal and redraw UI (which was "broken" by large image), no info bar needed
                 clear_fullscreen();
                 draw_static_ui();
                 
+                // Outccome based on what the player shot
                 gif_frame--;
                 if (gif_frame == 4 || gif_frame == 5 || gif_frame == 9 || gif_frame == 10){
+                    // Shot deviant
                     current_option = 0;
                 }
                 else if (gif_frame == 3 || gif_frame == 11){
+                    // Shot girl
                     current_option = 1;
                 }
                 else{
+                    // Missed
                     current_option = 2;
                 }
                 
-                // 3. Denna funktion försöker automatiskt skriva ut 
-                // platsen (Balcony) på rad 2.
+                // Go to next scene
                 update_scene();
-                
-                // 4. Eftersom vi BARA vill ha stjärnorna skriver vi 
-                // över rad 2 med ui_info (stjärnorna) direkt efter.
-                move_cursor(2, 1);
-                print((char*)ui_info);
-                
                 goto comeback;
             }
         }
