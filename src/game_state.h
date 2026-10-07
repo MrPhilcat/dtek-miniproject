@@ -1,4 +1,5 @@
 // game_state.h
+// Joint effort by Philipp & Aron
 #ifndef GAME_TYPES_H
 #define GAME_TYPES_H
 

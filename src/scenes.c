@@ -1,4 +1,5 @@
 // scenes.c
+// Primaraly by Aron
 #include "scenes.h"
 
 const Scene story_scenes[TOTAL_SCENES] = {

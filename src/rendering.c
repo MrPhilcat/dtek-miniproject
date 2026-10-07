@@ -1,4 +1,5 @@
 // rendering.c
+// Primaraly by Philipp
 #include "rendering.h"
 #include "graphics.h"
 #include "game_state.h"

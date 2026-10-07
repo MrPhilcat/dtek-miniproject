@@ -1,10 +1,13 @@
 // main.c
+// Joint effort by Philipp & Aron
+
 // Below functions are external and found in other files
 #include "dtekv-lib.h"
 #include "rendering.h"
 #include "graphics.h"
 #include "game_state.h"
 #include "scenes.h"
+#include "perf_counters.h"
 
 // Global variables
 unsigned int success_rate = 50;
@@ -284,7 +287,7 @@ void update_scene()
     render_success_rate();
 }
 
-int main(void) {
+int main() {
     // Variables used for storing IO polling
     int switch_state = 0;
     int button_state = 0;

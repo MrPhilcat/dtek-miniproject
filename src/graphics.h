@@ -1,4 +1,5 @@
 // graphics.h
+// Joint effort by Philipp & Aron
 #ifndef GRAPHICS_H
 #define GRAPHICS_H
 

@@ -1,4 +1,5 @@
 // graphics.c
+// Joint effort by Philipp & Aron
 #include "graphics.h"
 
 // The actual thousands of lines of ASCII go here.
