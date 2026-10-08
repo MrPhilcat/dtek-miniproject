@@ -7,7 +7,6 @@
 #include "graphics.h"
 #include "game_state.h"
 #include "scenes.h"
-#include "perf_counters.h"
 
 // Global variables
 unsigned int success_rate = 50;
@@ -36,6 +35,7 @@ int met_officer = 0;
 // How many while loop cycles before secondary input can be registered?
 #define DEBOUNCE_COOLDOWN 10000 
 
+//Together
 
 /* Code for initializing timer. */
 void timer_initialize(void) {
@@ -149,6 +149,7 @@ int get_button_state()
     return 0;
 }
 
+//By Aron
 void update_scene()
 {
     int target_scene = story_scenes[game.scene_index].options[current_option].nextSceneId;
@@ -250,6 +251,7 @@ void update_scene()
 
     clear_text();
 
+    // This particular snippet was dne by Philipp
     // Only wipe the screen and redraw if the image is ACTUALLY changing
     if (gif_state != scene_struct.gif_state_number){
         clear_display();
@@ -288,6 +290,7 @@ void update_scene()
 }
 
 int main() {
+    // By Philipp
     // Variables used for storing IO polling
     int switch_state = 0;
     int button_state = 0;
@@ -333,7 +336,7 @@ int main() {
     print((char*)ui_info2);
     
 
-    
+    //Togetehr
     // Intitialize core gameloop
     startup();
     while(1) {
@@ -429,6 +432,7 @@ int main() {
             }
         }
     
+    // By Aron
     ending:
         clear_fullscreen();
         draw_static_ui();

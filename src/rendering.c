@@ -1,5 +1,5 @@
 // rendering.c
-// Primaraly by Philipp
+// By Philipp
 #include "rendering.h"
 #include "graphics.h"
 #include "game_state.h"

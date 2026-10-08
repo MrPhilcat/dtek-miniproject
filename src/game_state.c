@@ -1,5 +1,5 @@
 // game_state.c
-// Primaraly by Aron
+// By Aron
 #include "game_state.h"
 
 const char *get_location_name(LocationID location)

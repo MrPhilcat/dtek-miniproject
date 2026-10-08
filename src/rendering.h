@@ -1,5 +1,5 @@
 // rendering.h
-// Primaraly by Philipp
+// By Philipp (very minor help from Aron)
 #ifndef RENDERING_H
 #define RENDERING_H
 

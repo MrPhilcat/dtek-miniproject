@@ -6,6 +6,7 @@
 #define INVENTORY_CAPACITY 3
 #define TOTAL_CLUES 4
 
+//By Philipp
 // Rendering Logic
 extern int gif_state;
 extern int gif_frame;
@@ -16,6 +17,7 @@ extern unsigned int success_rate;
 extern char *place;
 extern unsigned int time;
 
+//By Aron
 typedef enum
 {
   ITEM_NONE = 0,

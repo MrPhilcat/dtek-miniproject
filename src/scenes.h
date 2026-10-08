@@ -1,5 +1,5 @@
 // scenes.h
-// Primaraly by Aron
+// By Aron
 #ifndef SCENES_H
 #define SCENES_H
 
